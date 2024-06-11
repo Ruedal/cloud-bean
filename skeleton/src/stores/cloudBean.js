@@ -3,11 +3,26 @@ import { defineStore } from 'pinia';
 
 export const useAddContentStore = defineStore('addContent', () => {
   // 반응형 상태 - ref() -> 기본형 reactive() -> 참조형
+  const BASEURI = '/api/';
   const state = reactive({
     addContent: [],
   });
 
   //actions -> 함수, 기능
+
+  // TodoList 목록을 조회합니다.
+  const fetchAddContents = async () => {
+    try {
+      const response = await axios.get(BASEURI);
+      if (response.status === 200) {
+        state.todoList = response.data;
+      } else {
+        alert('데이터 조회 실패');
+      }
+    } catch (error) {
+      alert('에러 발생 : ' + error);
+    }
+  };
 
   const addContents = (todo) => {
     state.addContent.push({ id: new Date().getTime(), todo, done: false });
