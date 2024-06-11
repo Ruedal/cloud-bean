@@ -2,6 +2,7 @@
   <div>
     <homeCal></homeCal>
     <addContents></addContents>
+    <Header></Header>
   </div>
 </template>
 <script setup>
