@@ -1,4 +1,9 @@
 <template>
-  <div>Home</div>
+  <div>
+    <homeCal></homeCal>
+  </div>
 </template>
-<script setup></script>
+<script setup>
+import homeCal from '@/components/homeCal.vue';
+import homeSum from '@/components/homeSum.vue';
+</script>
