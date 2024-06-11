@@ -1,5 +1,5 @@
 <template>
-  <div>app</div>
+  <div>monthSummary</div>
 </template>
 
 <script setup></script>

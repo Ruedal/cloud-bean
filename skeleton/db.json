@@ -1,0 +1,51 @@
+{
+  "addContent": [
+    {
+      "id": "2",
+      "date": "2",
+      "type": "income",
+      "category": "월세",
+      "amount": "",
+      "memo": "메모2"
+    },
+    {
+      "id": "a34e",
+      "date": "24.6.10",
+      "type": "expense",
+      "category": "식비",
+      "amount": "25000",
+      "memo": "족발 회식"
+    }
+  ],
+  "type": [{ "income": "" }, { "expense": "" }],
+
+  "incomeCategory": [
+    { "name": "월급", "월급": "" },
+    { "name": "용돈", "용돈": "" },
+    { "name": "이자", "이자": "" },
+    { "name": "월세", "월세": "" }
+  ],
+
+  "expenseCategory": [
+    { "name": "식비", "식비": "" },
+    { "name": "교통비", "교통비": "" },
+    { "name": "공과금", "공과금": "" },
+    { "name": "경조사비", "경조사비": "" },
+    { "name": "애견용품", "애견용품": "" }
+  ],
+
+  "periodicExpense": [
+    {
+      "date": "",
+      "type": "",
+      "category": "",
+      "amount": ""
+    }
+  ],
+  "users": [
+    {
+      "name": "",
+      "pic": ""
+    }
+  ]
+}
