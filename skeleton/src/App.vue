@@ -2,6 +2,8 @@
   <div>
     <home></home>
     <detail_tab></detail_tab>
+    <monthSummary></monthSummary>
+    <profile></profile>
   </div>
 </template>
 
