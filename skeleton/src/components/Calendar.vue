@@ -1,6 +1,7 @@
 <template>
   <div id="calendarSection">
     <div>
+      <!-- 클릭하면 이전/다음 월로 이동 -->
       <button type="button" class="btn" @click="changeMonth(-1)">&lt;</button>
       {{ calendarHeader }}
       <button type="button" class="btn" @click="changeMonth(1)">&gt;</button>
@@ -8,21 +9,26 @@
     <table class="text-left border">
       <thead class="text-center border">
         <tr>
+          <!-- 요일 출력 -->
           <th v-for="index in week" :key="index">
             {{ index }}
           </th>
         </tr>
       </thead>
       <tbody>
+        <!-- 주 단위로 달력의 행 생성 -->
         <tr v-for="(week, i) in days" :key="i">
+          <!-- day가 null이 아니면 각주의 일자 표시 -->
           <td v-for="day in week" :key="day" class="border">
             <div v-if="day !== null">
               {{ day }}
+              <!-- 해당 일자에 입출금 내역이 있으면 표시 -->
               <div
                 v-if="
                   transactions[year] && transactions[year][month] && transactions[year][month][day]
                 "
               >
+                <!-- 입금 내역은 파랑, 출금 내역은 빨강으로 표시 -->
                 <div v-if="transactions[year][month][day].deposit" style="color: blue">
                   입금: {{ transactions[year][month][day].deposit }}
                 </div>
@@ -82,12 +88,14 @@ export default {
     },
     formatTransactions(data) {
       const transactions = {};
+      // 연 월 일 추출
       data.forEach((item) => {
         const date = new Date(item.date);
         const year = date.getFullYear();
         const month = date.getMonth();
         const day = date.getDate();
 
+        // 해당 연도 월의 객체가 없으면 생성 일은 객체가 없으면 초기화{0:0}
         if (!transactions[year]) {
           transactions[year] = {};
         }
@@ -97,6 +105,7 @@ export default {
         if (!transactions[year][month][day]) {
           transactions[year][month][day] = { deposit: 0, withdrawal: 0 };
         }
+        // 해당 날짜에 입/출금액 누적
         transactions[year][month][day].deposit += item.deposit;
         transactions[year][month][day].withdrawal += item.withdrawal;
       });
