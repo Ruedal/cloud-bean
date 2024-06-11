@@ -9,11 +9,11 @@ import profile from '@/pages/profile.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', name: 'home', component: home },
+    { path: '/home', name: 'home', component: home },
     { path: '/detail', name: 'detail', component: detail_tab },
     { path: '/monSum', name: 'monSum', component: monthSummary },
     { path: '/profile', name: 'profile', component: profile },
-    // { path: '/q_btn', name: 'q_btn', component: quick_btn },
+    // { path: '/home/q_btn', name: 'home/q_btn', component: quick_btn },
   ],
 });
 
