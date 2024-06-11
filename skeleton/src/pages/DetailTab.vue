@@ -1,5 +1,5 @@
 <template>
-  <div>detail_tab</div>
+  <div>detailTab</div>
 </template>
 
 <script setup></script>
