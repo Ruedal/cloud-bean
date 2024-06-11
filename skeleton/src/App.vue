@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <home></home>
-    <detail_tab></detail_tab>
+  <div class="container">
+    <Header />
+    <History />
+    <router-view />
   </div>
 </template>
 
 <script setup>
-import home from '@/pages/home.vue';
-import detail_tab from '@/pages/detail_tab.vue';
-import monthSummary from '@/pages/monthSummary.vue';
-import profile from '@/pages/profile.vue';
+import Header from '@/components/Header.vue';
+import History from '@/components/History.vue';
+// import { useAddContentStore } from '@/stores/cloudBean.js';
+
+// const AddContentStore = useAddContentStore();
+// const fetchTodoList = todoListStore.fetchTodoList;
+// fetchTodoList();
 </script>
