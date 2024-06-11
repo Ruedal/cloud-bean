@@ -1,5 +1,5 @@
 <template>
-  <div>app</div>
+  <div>profile</div>
 </template>
 
 <script setup></script>

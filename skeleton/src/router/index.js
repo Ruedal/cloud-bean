@@ -1,23 +1,20 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
 
+import home from '@/pages/home.vue';
+import detail_tab from '@/pages/detail_tab.vue';
+import monthSummary from '@/pages/monthSummary.vue';
+import profile from '@/pages/profile.vue';
+// import quick_btn from '@/pages/quick_btn.vue';
+// quick_btn은 마지막에 구현
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
-  ]
-})
+    { path: '/', name: 'home', component: home },
+    { path: '/detail', name: 'detail', component: detail_tab },
+    { path: '/monSum', name: 'monSum', component: monthSummary },
+    { path: '/profile', name: 'profile', component: profile },
+    // { path: '/q_btn', name: 'q_btn', component: quick_btn },
+  ],
+});
 
-export default router
+export default router;
