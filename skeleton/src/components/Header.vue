@@ -4,7 +4,7 @@
       class="navbar navbar-expand-lg navbar-dark bg-dark flex-column align-items-center"
       style="width: 20%"
     >
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href="#">목록</a>
       <div class="navbar-nav flex-column w-100">
         <a
           class="nav-link text-center"
@@ -29,10 +29,10 @@ export default {
   data() {
     return {
       items: [
-        { text: 'Home', link: '/' },
-        { text: 'About', link: '/about' },
-        { text: 'Services', link: '/services' },
-        { text: 'Contact', link: '/contact' },
+        { text: '홈', link: '/' },
+        { text: '거래 내역', link: '/History' },
+        { text: '월별 요약', link: '/HomeSum' },
+        { text: '프로필 설정', link: '/profile' },
       ],
     };
   },
