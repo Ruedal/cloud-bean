@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <Header />
-    <History />
-    <router-view />
-  </div>
+    <div class="container">
+        <Header />
+        <History />
+        <router-view />
+    </div>
 </template>
 
 <script setup>
