@@ -1,11 +1,14 @@
 // addContent 자료 모아두는 공간
 <template>
+  <!-- <span>
+    {{ content.date }}
+  </span> -->
   <tr>
-    <td class="text-center">{{ addContent.date }}</td>
-    <td class="text-center">{{ addContent.type }}</td>
-    <td class="text-end">{{ addContent.category }}</td>
-    <td class="text-end">{{ addContent.amount }}</td>
-    <td class="text-center">{{ addContent.memo }}</td>
+    <td class="text-center">{{ content.date }}</td>
+    <td class="text-center">{{ content.type }}</td>
+    <td class="text-end">{{ content.category }}</td>
+    <td class="text-end">{{ content.amount }}</td>
+    <td class="text-center">{{ content.memo }}</td>
   </tr>
 </template>
 
@@ -14,7 +17,7 @@ import { useRouter } from 'vue-router';
 import { useAddContentStore } from '@/stores/cloudBean.js';
 
 defineProps({
-  addContent: { Type: Object, required: true },
+  content: { Type: Object, required: true },
 });
 
 const router = useRouter();

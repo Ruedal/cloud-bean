@@ -74,7 +74,7 @@ import { useAddContentStore } from '@/stores/cloudBean.js';
 defineProps({
   addContent: { Type: Object, required: true },
 });
-
+// , fetchAddContents
 const { addAC, deleteAC } = useAddContentStore();
 const contents = reactive({
   date: '',
@@ -83,9 +83,9 @@ const contents = reactive({
   amount: '',
   memo: '',
 });
-
 const addContentsHandler = () => {
   // 예외처리 추가하기(빈칸처리)
   addAC({ ...contents }, () => {});
+  // fetchAddContents();
 };
 </script>

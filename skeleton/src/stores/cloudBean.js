@@ -10,9 +10,11 @@ export const useAddContentStore = defineStore('addContent', () => {
   //actions -> 함수, 기능
 
   // AddContent 목록을 조회합니다.
+
   const fetchAddContents = async () => {
     try {
       const response = await axios.get(BASEURI);
+      // console.log(response);
       if (response.status === 200) {
         state.addContent = response.data;
       } else {

@@ -1,10 +1,10 @@
 <template>
+  <div>
     <div>
-        <div>
-            <HomeSum></HomeSum>
-            <HomeCal></HomeCal>
-        </div>
+      <HomeSum></HomeSum>
+      <HomeCal></HomeCal>
     </div>
+  </div>
 </template>
 <script setup>
 import HomeCal from '@/components/HomeCal.vue';
