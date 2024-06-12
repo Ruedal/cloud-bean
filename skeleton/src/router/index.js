@@ -9,10 +9,10 @@ import Profile from '@/pages/Profile.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/home', name: 'home', component: Home },
-    { path: '/tab', name: 'dTab', component: DetailTab },
-    { path: '/monSum', name: 'monSum', component: MonthSummary },
-    { path: '/profile', name: 'profile', component: Profile },
+    { path: '/', name: 'Home', component: Home },
+    { path: '/tab', name: 'DTab', component: DetailTab },
+    { path: '/monsum', name: 'MonSum', component: MonthSummary },
+    { path: '/profile', name: 'Profile', component: Profile },
     // { path: '/Home/QBtn', name: 'home/q_btn', component: quick_btn },
   ],
 });
