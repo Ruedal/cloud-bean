@@ -1,14 +1,16 @@
 <template>
-    <div class="container">
-        <Header />
-        <History />
-        <router-view />
-    </div>
+  <div class="container">
+    <Header />
+    <History />
+    <Calendar />
+    <router-view />
+  </div>
 </template>
 
 <script setup>
 import Header from '@/components/Header.vue';
 import History from '@/components/History.vue';
+import Calendar from '@/components/Calendar.vue';
 // import { useAddContentStore } from '@/stores/cloudBean.js';
 
 // const AddContentStore = useAddContentStore();
