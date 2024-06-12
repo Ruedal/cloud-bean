@@ -1,12 +1,11 @@
 <template>
     <div>
         <div>
-            <HomeSum></HomeSum>
-            <HomeCal></HomeCal>
+            <Calendar />
         </div>
     </div>
 </template>
 <script setup>
-import HomeCal from '@/components/HomeCal.vue';
-import HomeSum from '@/components/HomeSum.vue';
+import Header from '@/components/Header.vue';
+import Calendar from '@/components/Calendar.vue';
 </script>

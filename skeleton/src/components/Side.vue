@@ -1,36 +1,26 @@
 <template>
-  <div>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark flex-column align-items-center rounded-4 mt-1"
-    >
-      <a class="navbar-brand" href="#">목록</a>
-      <div class="navbar-nav flex-column">
-        <a
-          class="nav-link text-center"
-          v-for="(item, index) in items"
-          :key="index"
-          :href="item.link"
-        >
-          {{ item.text }}
-        </a>
-      </div>
+    <nav class="navbar flex-column navbar-expand-lg bg-dark navbar-dark mt-1 rounded-4">
+        <span class="navbar-brand">목록</span>
+        <button class="navbar-toggler" type="button" @click="changeIsNavShow">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div :class="navClass">
+            <ul class="navbar-nav flex-column text-center">
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/">홈</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/tab">거래 내역</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/monsum">월별 요약</router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/profile">프로필 설정</router-link>
+                </li>
+            </ul>
+        </div>
     </nav>
-  </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      items: [
-        { text: '홈', link: '/' },
-        { text: '거래 내역', link: '/tab' },
-        { text: '월별 요약', link: '/monsum' },
-        { text: '프로필 설정', link: '/profile' },
-      ],
-    };
-  },
-};
-</script>
-
-<style lang="scss" scoped></style>
+<script setup></script>
