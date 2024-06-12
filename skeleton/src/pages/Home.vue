@@ -1,9 +1,11 @@
 <template>
+  <div>
     <div>
-        <div>
-            <Calendar />
-        </div>
+      <div>
+        <Calendar />
+      </div>
     </div>
+  </div>
 </template>
 <script setup>
 import Header from '@/components/Header.vue';

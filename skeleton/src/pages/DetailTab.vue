@@ -1,5 +1,10 @@
 <template>
-  <div>detailTab</div>
+  <div class="m-3 p-3">
+    <AddContents />
+    <History />
+  </div>
 </template>
-
-<script setup></script>
+<script setup>
+import AddContents from '@/components/AddContents.vue';
+import History from '@/components/History.vue';
+</script>

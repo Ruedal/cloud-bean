@@ -13,7 +13,7 @@
                 <VDatePicker v-model="date">
                   <template #default="{ togglePopover }">
                     <button class="rounded-md" @click="togglePopover">
-                      Select date
+                      날짜
                     </button>
                   </template>
                 </VDatePicker>
@@ -61,15 +61,14 @@
             <th>메모</th>
           </tr>
         </thead>
-        <tbody class="table-striped">
-          <tr>
-            <td class="text-center">2024-06-11</td>
-            <td class="text-center">식비</td>
-            <td class="text-end">0</td>
-            <td class="text-end">23,000</td>
-            <td class="text-center">치킨 한마리에 치즈볼 까지 먹어버렸다.</td>
-          </tr>
-          <tr>
+        <tbody>
+          <Contents
+            v-for="contents in addContent"
+            :key="contents.id"
+            :contents="contents"
+          />
+
+          <!-- <tr>
             <td class="text-center">2024-06-12</td>
             <td class="text-center">월급</td>
             <td class="text-end">4,213,000</td>
@@ -91,7 +90,7 @@
             <td class="text-center">
               사료, 간식, 배변패드, 장난감까지 알차게 구매했다.
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -103,8 +102,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useAddContentStore } from '@/stores/cloudBean.js';
+// import TodoItem from '@/components/TodoItem.vue';
+import Contents from '@/components/Contents.vue';
 
+const AddContentStore = useAddContentStore();
+// const { fetchAddContents } = AddContentStore.fetchAddContents;
+const addContent = computed(() => AddContentStore.addContent);
+// 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
+// console.log(addContent);
 const attributes = ref([
   {
     highlight: true,
@@ -117,5 +124,4 @@ const attributes = ref([
     },
   },
 ]);
-// 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
 </script>
