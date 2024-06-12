@@ -4,11 +4,11 @@
     {{ content.date }}
   </span> -->
   <tr>
-    <td class="text-center">{{ content.date }}</td>
-    <td class="text-center">{{ content.type }}</td>
-    <td class="text-end">{{ content.category }}</td>
-    <td class="text-end">{{ content.amount }}</td>
-    <td class="text-center">{{ content.memo }}</td>
+    <td class="text-center">{{ contents.date }}</td>
+    <td class="text-center">{{ contents.type }}</td>
+    <td class="text-end">{{ contents.category }}</td>
+    <td class="text-end">{{ contents.amount }}</td>
+    <td class="text-center">{{ contents.memo }}</td>
   </tr>
 </template>
 
@@ -17,7 +17,7 @@ import { useRouter } from 'vue-router';
 import { useAddContentStore } from '@/stores/cloudBean.js';
 
 defineProps({
-  content: { Type: Object, required: true },
+  contents: { Type: Object, required: true },
 });
 
 const router = useRouter();
