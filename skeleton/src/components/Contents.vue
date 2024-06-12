@@ -1,12 +1,12 @@
 // addContent 자료 모아두는 공간
 <template>
-  <li>
-    <span>
-      {{ addContent.memo }}
-    </span>
-    <span class="float-end badge bg-secondary pointer m-1">편집</span>
-    <span class="float-end badge bg-secondary pointer m-1">삭제</span>
-  </li>
+  <tr>
+    <td class="text-center">{{ addContent.date }}</td>
+    <!-- <td class="text-center">{{ addContent.type }}</td>
+    <td class="text-end">{{ addContent.category }}</td>
+    <td class="text-end">{{ addContent.amount }}</td>
+    <td class="text-center">{{ addContent.memo }}</td> -->
+  </tr>
 </template>
 
 <script setup>
@@ -19,5 +19,4 @@ defineProps({
 
 const router = useRouter();
 const AddContentStore = useAddContentStore();
-const { fetchAddContents } = AddContentStore;
 </script>

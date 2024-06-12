@@ -2,7 +2,8 @@
   <!-- <div class="navbar-nav">
     <router-link class="nav-link" to="/Profile">Profile</router-link> -->
   <div>
-    <QBtn></QBtn>
+    <!-- <QBtn></QBtn> -->
+    <History />
   </div>
   <!-- 상단 UI(proplile 사진과, 닉네임 정보 불러와서 적용) -->
 
@@ -13,5 +14,6 @@
 </template>
 
 <script setup>
-import QBtn from '@/components/QBtn.vue';
+// import QBtn from '@/components/QBtn.vue';
+import History from '@/components/History.vue';
 </script>

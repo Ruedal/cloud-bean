@@ -61,15 +61,14 @@
             <th>메모</th>
           </tr>
         </thead>
-        <tbody class="table-striped">
-          <tr v-for="i in addContent" :key="i.id">
-            <td class="text-center">{{ i.date }}</td>
-            <td class="text-center">{{ i.type }}</td>
-            <td class="text-end">{{ i.category }}</td>
-            <td class="text-end">{{ i.amount }}</td>
-            <td class="text-center">{{ i.memo }}</td>
-          </tr>
-          <tr>
+        <tbody>
+          <Contents
+            v-for="content in addContent"
+            :key="content.date"
+            :content="content"
+          />
+
+          <!-- <tr>
             <td class="text-center">2024-06-12</td>
             <td class="text-center">월급</td>
             <td class="text-end">4,213,000</td>
@@ -91,7 +90,7 @@
             <td class="text-center">
               사료, 간식, 배변패드, 장난감까지 알차게 구매했다.
             </td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
     </div>
@@ -103,7 +102,10 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useAddContentStore } from '@/stores/cloudBean.js';
+// import TodoItem from '@/components/TodoItem.vue';
+import Contents from '@/components/Contents.vue';
 
 const attributes = ref([
   {
@@ -118,5 +120,8 @@ const attributes = ref([
   },
 ]);
 
+const AddContentStore = useAddContentStore();
+// const { fetchAddContents } = AddContentStore.fetchAddContents;
+const addContent = computed(() => AddContentStore.addContent);
 // 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
 </script>

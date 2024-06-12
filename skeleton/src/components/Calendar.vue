@@ -25,14 +25,22 @@
               <!-- 해당 일자에 입출금 내역이 있으면 표시 -->
               <div
                 v-if="
-                  transactions[year] && transactions[year][month] && transactions[year][month][day]
+                  transactions[year] &&
+                  transactions[year][month] &&
+                  transactions[year][month][day]
                 "
               >
                 <!-- 입금 내역은 파랑, 출금 내역은 빨강으로 표시 -->
-                <div v-if="transactions[year][month][day].deposit" style="color: blue">
+                <div
+                  v-if="transactions[year][month][day].deposit"
+                  style="color: blue"
+                >
                   입금: {{ transactions[year][month][day].deposit }}
                 </div>
-                <div v-if="transactions[year][month][day].withdrawal" style="color: red">
+                <div
+                  v-if="transactions[year][month][day].withdrawal"
+                  style="color: red"
+                >
                   출금: {{ transactions[year][month][day].withdrawal }}
                 </div>
               </div>
@@ -117,7 +125,10 @@ export default {
       this.month = this.today.getMonth(); // 현재 월 설정
       const startDayOfTheMonth = new Date(this.year, this.month, 1).getDay(); // 해당 월의 시작 요일
       const endDayOfTheMonth = new Date(this.year, this.month + 1, 0).getDate(); // 해당 월의 마지막 일자
-      const basicDays = Array.from({ length: endDayOfTheMonth }, (v, i) => i + 1); // 1일부터 마지막 일자까지 배열 생성
+      const basicDays = Array.from(
+        { length: endDayOfTheMonth },
+        (v, i) => i + 1
+      ); // 1일부터 마지막 일자까지 배열 생성
       const emptyDays = Array(startDayOfTheMonth).fill(null); // 시작 요일까지 빈 칸 채우기
       const combinedDays = [...emptyDays, ...basicDays]; // 빈 칸과 일자를 합침
       for (let i = 0; i < endDayOfTheMonth + startDayOfTheMonth; i += 7) {
@@ -128,10 +139,13 @@ export default {
     },
     addLastWeekEmptyDays() {
       const daysLastIndex = this.days.length - 1;
-      if (this.days[daysLastIndex].length !== 7) this.days[daysLastIndex].length = 7; // 마지막 주가 7일이 아니면 빈 칸 추가
+      if (this.days[daysLastIndex].length !== 7)
+        this.days[daysLastIndex].length = 7; // 마지막 주가 7일이 아니면 빈 칸 추가
     },
     changeMonth(val) {
-      this.today = new Date(this.today.setMonth(this.today.getMonth() + val, 1)); // 월 변경
+      this.today = new Date(
+        this.today.setMonth(this.today.getMonth() + val, 1)
+      ); // 월 변경
       this.calendarImplementation(); // 달력 다시 구현
       this.fetchTransactions(); // 새로운 월의 입출금 내역 가져옴
     },
