@@ -1,14 +1,12 @@
 <template>
   <div>
-    <homeCal></homeCal>
-    <addContents></addContents>
-    <Header></Header>
+    <div>
+      <HomeSum></HomeSum>
+      <HomeCal></HomeCal>
+    </div>
   </div>
 </template>
 <script setup>
-import homeCal from '@/components/homeCal.vue';
-import homeSum from '@/components/homeSum.vue';
-// import addContents from '@/components/addContents.vue';
-import Header from '@/components/Header.vue';
-// import history from '@/components/history.vue';
+import HomeCal from '@/components/HomeCal.vue';
+import HomeSum from '@/components/HomeSum.vue';
 </script>
