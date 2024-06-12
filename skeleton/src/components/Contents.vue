@@ -2,10 +2,10 @@
 <template>
   <tr>
     <td class="text-center">{{ addContent.date }}</td>
-    <!-- <td class="text-center">{{ addContent.type }}</td>
+    <td class="text-center">{{ addContent.type }}</td>
     <td class="text-end">{{ addContent.category }}</td>
     <td class="text-end">{{ addContent.amount }}</td>
-    <td class="text-center">{{ addContent.memo }}</td> -->
+    <td class="text-center">{{ addContent.memo }}</td>
   </tr>
 </template>
 
