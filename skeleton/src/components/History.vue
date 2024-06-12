@@ -13,7 +13,7 @@
                 <VDatePicker v-model="date">
                   <template #default="{ togglePopover }">
                     <button class="rounded-md" @click="togglePopover">
-                      Select date
+                      날짜
                     </button>
                   </template>
                 </VDatePicker>
@@ -62,12 +62,12 @@
           </tr>
         </thead>
         <tbody class="table-striped">
-          <tr>
-            <td class="text-center">2024-06-11</td>
-            <td class="text-center">식비</td>
-            <td class="text-end">0</td>
-            <td class="text-end">23,000</td>
-            <td class="text-center">치킨 한마리에 치즈볼 까지 먹어버렸다.</td>
+          <tr v-for="i in addContent" :key="i.id">
+            <td class="text-center">{{ i.date }}</td>
+            <td class="text-center">{{ i.type }}</td>
+            <td class="text-end">{{ i.category }}</td>
+            <td class="text-end">{{ i.amount }}</td>
+            <td class="text-center">{{ i.memo }}</td>
           </tr>
           <tr>
             <td class="text-center">2024-06-12</td>
@@ -117,5 +117,6 @@ const attributes = ref([
     },
   },
 ]);
+
 // 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
 </script>

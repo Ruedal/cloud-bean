@@ -1,21 +1,20 @@
 import { reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
+import axios from 'axios';
 
 export const useAddContentStore = defineStore('addContent', () => {
   // 반응형 상태 - ref() -> 기본형 reactive() -> 참조형
-  const BASEURI = '/api/';
-  const state = reactive({
-    addContent: [],
-  });
+  const BASEURI = '/api/addContent';
+  const state = reactive({ addContent: [] });
 
   //actions -> 함수, 기능
 
-  // TodoList 목록을 조회합니다.
+  // AddContent 목록을 조회합니다.
   const fetchAddContents = async () => {
     try {
       const response = await axios.get(BASEURI);
       if (response.status === 200) {
-        state.todoList = response.data;
+        state.addContent = response.data;
       } else {
         alert('데이터 조회 실패');
       }
@@ -24,18 +23,53 @@ export const useAddContentStore = defineStore('addContent', () => {
     }
   };
 
-  const addContents = (todo) => {
-    state.addContent.push({ id: new Date().getTime(), todo, done: false });
+  // 새로운 AddContent를 추가합니다.
+  const addAC = async (
+    { date, type, category, amount, memo },
+    successCallback
+  ) => {
+    try {
+      const payload = { date, type, category, amount, memo };
+      const response = await axios.post(BASEURI, payload);
+      if (response.status === 201) {
+        state.addContent.push({ ...response.data });
+        successCallback();
+      } else {
+        alert('Todo 추가 실패');
+      }
+    } catch (error) {
+      alert('에러발생 : ' + error);
+    }
   };
+
+  // 기존 TodoItem을 삭제합니다.
+  const deleteAC = async (id) => {
+    try {
+      const response = await axios.delete(BASEURI + `/${id}`);
+      if (response.status === 200) {
+        let index = state.addContent.findIndex((date) => date.id === id);
+        state.addContent.splice(index, 1);
+      } else {
+        alert('Todo 삭제 실패');
+      }
+    } catch (error) {
+      alert('에러발생 : ' + error);
+    }
+  };
+  // const addContents = (todo) => {
+  //   state.addContent.push({ id: new Date().getTime(), todo, done: false });
+  // };
+
   // const toggleDone = (id) => {
   //   let index = state.addContent.findIndex((todo) => todo.id === id);
   //   state.addContent[index].done = !state.addContent[index].done;
   // };
   // 토글 기능 사용하려면 addContent에 부울린 추가
-  const deleteContents = (id) => {
-    let index = state.addContent.findIndex((todo) => todo.id === id);
-    state.addContent.splice(index, 1);
-  };
+
+  // const deleteContents = (id) => {
+  //   let index = state.addContent.findIndex((todo) => todo.id === id);
+  //   state.addContent.splice(index, 1);
+  // };
 
   // const doneCount = computed(() => {
   //   return state.todoList.filter((todoItem) => todoItem.done === true).length;
@@ -45,7 +79,7 @@ export const useAddContentStore = defineStore('addContent', () => {
   //getter -> computed 계산된 속성
   const addContent = computed(() => state.addContent);
 
-  return { addContent, addContents, deleteContents };
+  return { addContent, fetchAddContents, addAC, deleteAC };
 });
 //1 사용할 함수(기능)명 지정 2
 
