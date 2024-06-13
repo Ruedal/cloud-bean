@@ -5,7 +5,13 @@ import axios from 'axios';
 export const useAddContentStore = defineStore('addContent', () => {
   // 반응형 상태 - ref() -> 기본형 reactive() -> 참조형
   const BASEURI = '/api/addContent';
-  const state = reactive({ addContent: [] });
+  const ICATEGORYURI = '/api/incomeCategory';
+  const ECATEGORYURI = '/api/expenseCategory';
+  const state = reactive({
+    addContent: [],
+    incomeCategory: [],
+    expenseCategory: [],
+  });
 
   //actions -> 함수, 기능
 
@@ -17,6 +23,34 @@ export const useAddContentStore = defineStore('addContent', () => {
       // console.log(response);
       if (response.status === 200) {
         state.addContent = response.data;
+      } else {
+        alert('데이터 조회 실패');
+      }
+    } catch (error) {
+      alert('에러 발생 : ' + error);
+    }
+  };
+
+  const fetchIncomeCategory = async () => {
+    try {
+      const response = await axios.get(ICATEGORYURI);
+      // console.log(response);
+      if (response.status === 200) {
+        state.incomeCategory = response.data;
+      } else {
+        alert('데이터 조회 실패');
+      }
+    } catch (error) {
+      alert('에러 발생 : ' + error);
+    }
+  };
+
+  const fetchExpenseCategory = async () => {
+    try {
+      const response = await axios.get(ECATEGORYURI);
+      // console.log(response);
+      if (response.status === 200) {
+        state.expenseCategory = response.data;
       } else {
         alert('데이터 조회 실패');
       }
@@ -80,8 +114,19 @@ export const useAddContentStore = defineStore('addContent', () => {
 
   //getter -> computed 계산된 속성
   const addContent = computed(() => state.addContent);
+  const incomeCategory = computed(() => state.incomeCategory);
+  const expenseCategory = computed(() => state.expenseCategory);
 
-  return { addContent, fetchAddContents, addAC, deleteAC };
+  return {
+    addContent,
+    incomeCategory,
+    expenseCategory,
+    fetchIncomeCategory,
+    fetchExpenseCategory,
+    fetchAddContents,
+    addAC,
+    deleteAC,
+  };
 });
 //1 사용할 함수(기능)명 지정 2
 

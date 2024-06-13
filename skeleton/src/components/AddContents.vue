@@ -1,12 +1,12 @@
 <!-- detail_tab 1번 컴포넌트 -->
 
 <template>
-  <div>
+  <div class="rounded-4 bg-light mb-4 mt-3 p-1">
     <div class="row">
       <!-- 날짜  -->
-      <div id="cal">
-        <span class="font-semibold">날짜 선택</span>
-        <VDatePicker v-model="contents.date">
+      <div id="cal" class="d-flex align-items-center gap-3">
+        <span class="font-bold">날짜 선택</span>
+        <VDatePicker class="" v-model="contents.date">
           <template #default="{ togglePopover }">
             <button
               class="px-3 py-2 bg-primary text-white font-semibold rounded-4"
@@ -25,25 +25,32 @@
         <div class="row">
           <div class="form-row d-flex">
             <div class="p-1 form-group col-md-4">
-              <label for="">입금/출금</label>
-              <select class="form-control" v-model="contents.type">
-                <option selected>입금</option>
-                <option>출금</option>
+              <label for="transactionType">입금/출금</label>
+              <select
+                v-model="selectedTransactionType"
+                @change="onTransactionTypeChange"
+                class="form-control"
+                id="transactionType"
+              >
+                <option value="입금">입금</option>
+                <option value="출금">출금</option>
               </select>
             </div>
             <div class="p-1 form-group col-md-4">
-              <label for="inputState">카테고리</label>
+              <label for="category">카테고리</label>
               <select
-                id="inputState"
+                v-model="selectedCategory"
                 class="form-control"
-                v-model="contents.category"
+                id="category"
               >
-                <option selected>Choose...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
+                <option value="" selected>Choose...</option>
+                <option
+                  v-for="option in categoryOptions"
+                  :key="option.value"
+                  :value="option.value"
+                >
+                  {{ option.text }}
+                </option>
               </select>
             </div>
             <div class="p-1 form-group col-md-4">
@@ -73,7 +80,6 @@
       <div>
         <!-- 버튼 그룹 -->
         <div class="mt-4 form-group">
-          <div class=""></div>
           <div>
             <button type="button" class="btn btn-outline-primary m-1">
               리 셋</button
@@ -95,38 +101,19 @@
   </div>
 </template>
 <script setup>
-import { inject, reactive } from 'vue';
+import { inject, reactive, computed, watchEffect, ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-
-const attributes = ref([
-  {
-    highlight: true,
-    dates: {
-      start: new Date(2022, 10, 7),
-      repeat: {
-        every: [2, 'weeks'],
-        weekdays: 2,
-      },
-    },
-  },
-]);
+import { useAddContentStore } from '@/stores/cloudBean.js';
 
 const router = useRouter();
-// const { addTodo } = inject('actions');
-// const todoItem = reactive({ todo: '', desc: '' });
-// const addTodoHandler = () => {
-// let { todo } = todoItem;
-// if (!todo || todo.trim() === '') {
-//     alert('할일은 반드시 입력해야 합니다');
-//     return;
-// }
-// addTodo({ ...todoItem });
-// router.push('/todos');
 const date = function () {
   new Date.getDate();
 };
-import { useAddContentStore } from '@/stores/cloudBean.js';
+
+const AddContentStore = useAddContentStore();
+const incomeCategory = computed(() => AddContentStore.incomeCategory);
+const expenseCategory = computed(() => AddContentStore.expenseCategory);
+// console.log(expenseCategory);
 
 defineProps({
   addContent: { Type: Object, required: true },
@@ -140,9 +127,44 @@ const contents = reactive({
   amount: '',
   memo: '',
 });
+
 const addContentsHandler = () => {
   // 예외처리 추가하기(빈칸처리)
   addAC({ ...contents }, () => {});
   // fetchAddContents();
 };
+const selectedTransactionType = ref('입금');
+const selectedCategory = ref('');
+const categoryOptions = ref([]);
+
+const allCategoryOptions = reactive({
+  입금: incomeCategory,
+  출금: expenseCategory,
+});
+console.log(allCategoryOptions);
+
+const onTransactionTypeChange = () => {
+  categoryOptions.value =
+    allCategoryOptions[selectedTransactionType.value] || [];
+  selectedCategory.value = ''; // 카테고리 선택 초기화
+};
+
+// 초기 로드 시 카테고리 옵션 설정
+watchEffect(() => {
+  onTransactionTypeChange();
+});
+
+//날짜 선택 부분
+const attributes = ref([
+  {
+    highlight: true,
+    dates: {
+      start: new Date(2022, 10, 7),
+      repeat: {
+        every: [2, 'weeks'],
+        weekdays: 2,
+      },
+    },
+  },
+]);
 </script>
