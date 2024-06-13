@@ -1,6 +1,6 @@
 <template>
   <div id="calendarSection" class="container">
-    <!-- 월별 합계 상자 입금/totaldeposit 출금totalwithdrawal 합계balance-->
+    <!-- 월별 합계 상자 -->
     <div class="summary-box card text-center mb-4 mt-3 p-1">
       <div class="card-body row">
         <div class="summary-item col">
@@ -30,31 +30,22 @@
             &lt;
           </button>
           <h5 class="card-title m-0 fw-bold fs-3">{{ calendarHeader }}</h5>
-          <button
-            type="button"
-            class="btn btn-light btn-outline-secondary"
-            @click="changeMonth(1)"
-          >
+          <button type="button" class="btn btn-light btn-outline-secondary" @click="changeMonth(1)">
             &gt;
           </button>
         </div>
         <table class="table table-bordered text-center">
           <thead>
             <tr>
-              <th v-for="index in week" :key="index">
-                {{ index }}
-              </th>
+              <th v-for="index in week" :key="index">{{ index }}</th>
             </tr>
           </thead>
           <tbody>
-            <!-- 주 단위로 달력의 행 생성 -->
             <tr v-for="(week, i) in days" :key="i">
               <td v-for="day in week" :key="day" class="calendar-day">
-                <!-- day가 null이 아니면 각주의 일자 표시 -->
                 <div v-if="day !== null" class="day-content">
                   <span class="day-number">{{ day }}</span>
                   <div class="transaction-section">
-                    <!-- 해당 일자에 입출금 내역이 있으면 표시 -->
                     <div
                       v-if="
                         transactions[year] &&
@@ -73,7 +64,6 @@
                         class="text-primary transaction-detail"
                       >
                         &nbsp;
-                        <!-- 빈 줄 추가 -->
                       </div>
                       <div
                         v-if="transactions[year][month][day].withdrawal"
@@ -86,7 +76,6 @@
                         class="text-danger transaction-detail"
                       >
                         &nbsp;
-                        <!-- 빈 줄 추가 -->
                       </div>
                     </div>
                   </div>
@@ -102,49 +91,36 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useAddContentStore } from '@/stores/cloudBean.js';
 
-const today = ref(new Date()); // 오늘 날짜
-const week = ref(['일', '월', '화', '수', '목', '금', '토']); // 요일 배열
-const calendarHeader = ref(''); // 달력 헤더 (연도와 월 표시)
-const days = ref([]); // 달력의 일자들
-const transactions = ref({}); // 날짜별 입출금 내역
-const year = ref(0); // 현재 연도
-const month = ref(0); // 현재 월
+const today = ref(new Date());
+const week = ref(['일', '월', '화', '수', '목', '금', '토']);
+const calendarHeader = ref('');
+const days = ref([]);
+const transactions = ref({});
+const year = ref(0);
+const month = ref(0);
+const addContentStore = useAddContentStore();
+const { fetchAddContents } = addContentStore;
+const addContent = computed(() => addContentStore.addContent);
 
-const fetchTransactions = () => {
-  // 데이터베이스에서 입출금 내역을 가져오는 실제 API 호출을 여기에 추가
-  // 예시:
-  // const year = year.value;
-  // const month = month.value + 1; // 0부터 시작하므로 +1
-  // fetch(`/api/transactions?year=${year}&month=${month}`)
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     transactions.value = formatTransactions(data);
-  //   });
-
-  // 시연을 위한 샘플 데이터
-  const sampleData = [
-    { date: '2024-06-01', deposit: 1000, withdrawal: 0 },
-    { date: '2024-06-01', deposit: 500, withdrawal: 0 },
-    { date: '2024-06-01', deposit: 0, withdrawal: 600 },
-    { date: '2024-07-01', deposit: 1500, withdrawal: 0 },
-    { date: '2024-07-02', deposit: 0, withdrawal: 300 },
-    { date: '2024-07-05', deposit: 500, withdrawal: 0 },
-    // 더 많은 샘플 데이터 추가
-  ];
-  transactions.value = formatTransactions(sampleData);
+const fetchTransactions = async () => {
+  await fetchAddContents();
+  const data = addContent.value;
+  console.log(data);
+  transactions.value = formatTransactions(data);
 };
 
 const formatTransactions = (data) => {
   const formattedTransactions = {};
   data.forEach((item) => {
-    // 연 월 일 추출
     const date = new Date(item.date);
     const year = date.getFullYear();
     const month = date.getMonth();
     const day = date.getDate();
 
-    // 해당 연 월의 객체가 없으면 생성, 일의 객체가 없으면 초기화 { 입금:0, 출금:0 }
+    // console.log(`${JSON.stringify(item)}`);
+
     if (!formattedTransactions[year]) {
       formattedTransactions[year] = {};
     }
@@ -154,79 +130,70 @@ const formatTransactions = (data) => {
     if (!formattedTransactions[year][month][day]) {
       formattedTransactions[year][month][day] = { deposit: 0, withdrawal: 0 };
     }
-    // 해당 [연][월][일].입금or출금에 각각 입/출금 내역 누적
-    formattedTransactions[year][month][day].deposit += item.deposit;
-    formattedTransactions[year][month][day].withdrawal += item.withdrawal;
+    // console.log(`${JSON.stringify(item.amount)}`);
+    if (item.type === '입금') {
+      formattedTransactions[year][month][day].deposit += parseFloat(item.amount);
+    } else if (item.type === '출금') {
+      formattedTransactions[year][month][day].withdrawal += parseFloat(item.amount);
+    }
   });
-  return formattedTransactions; // 연도, 월, 일자별 입출금 내역 반환
+  return formattedTransactions;
 };
 
 const calendarImplementation = () => {
   days.value = [];
-  year.value = today.value.getFullYear(); // 현재 연도 설정
-  month.value = today.value.getMonth(); // 현재 월 설정
-  const startDayOfTheMonth = new Date(year.value, month.value, 1).getDay(); // 해당 월의 시작 요일
-  const endDayOfTheMonth = new Date(year.value, month.value + 1, 0).getDate(); // 해당 월의 마지막 일자
-  const basicDays = Array.from({ length: endDayOfTheMonth }, (v, i) => i + 1); // 1일부터 마지막 일자까지 배열 생성
-  const emptyDays = Array(startDayOfTheMonth).fill(null); // 시작 요일까지 빈 칸 채우기
-  const combinedDays = [...emptyDays, ...basicDays]; // 빈 칸과 일자를 합침
+  year.value = today.value.getFullYear();
+  month.value = today.value.getMonth();
+  const startDayOfTheMonth = new Date(year.value, month.value, 1).getDay();
+  const endDayOfTheMonth = new Date(year.value, month.value + 1, 0).getDate();
+  const basicDays = Array.from({ length: endDayOfTheMonth }, (v, i) => i + 1);
+  const emptyDays = Array(startDayOfTheMonth).fill(null);
+  const combinedDays = [...emptyDays, ...basicDays];
   for (let i = 0; i < endDayOfTheMonth + startDayOfTheMonth; i += 7) {
-    days.value.push(combinedDays.slice(i, i + 7)); // 주 단위로 끊어서 days 배열에 추가
+    days.value.push(combinedDays.slice(i, i + 7));
   }
-  calendarHeader.value = `${year.value}년 ${month.value + 1} 월`; // 달력 헤더 설정
+  calendarHeader.value = `${year.value}년 ${month.value + 1} 월`;
   addLastWeekEmptyDays();
 };
 
-// 마지막 주가 7일이 아니면 남은 칸 빈칸으로 7칸까지 출력
 const addLastWeekEmptyDays = () => {
   const daysLastIndex = days.value.length - 1;
-  if (days.value[daysLastIndex].length !== 7)
-    days.value[daysLastIndex].length = 7; // 마지막 주가 7일이 아니면 빈 칸 추가
+  if (days.value[daysLastIndex].length !== 7) days.value[daysLastIndex].length = 7;
 };
 
 const changeMonth = (val) => {
-  today.value = new Date(today.value.setMonth(today.value.getMonth() + val, 1)); // 월 변경
-  calendarImplementation(); // 달력 다시 구현
-  fetchTransactions(); // 새로운 월의 입출금 내역 가져옴
+  today.value = new Date(today.value.setMonth(today.value.getMonth() + val, 1));
+  calendarImplementation();
+  fetchTransactions();
 };
 
-// 당월 입금 총액 계산, 없으면 0 리턴
 const totalDeposit = computed(() => {
-  if (
-    !transactions.value[year.value] ||
-    !transactions.value[year.value][month.value]
-  ) {
+  if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
     return 0;
   }
-  // acc에 입금 내역 더해줌
   return Object.values(transactions.value[year.value][month.value]).reduce(
     (acc, day) => acc + day.deposit,
     0
   );
 });
-// 당월 출금 총액 계산, 없으면 0 리턴
+
 const totalWithdrawal = computed(() => {
-  if (
-    !transactions.value[year.value] ||
-    !transactions.value[year.value][month.value]
-  ) {
+  if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
     return 0;
   }
-  // acc에 출금 내역 더해줌
   return Object.values(transactions.value[year.value][month.value]).reduce(
     (acc, day) => acc + day.withdrawal,
     0
   );
 });
 
-// 합계 = 입금 - 출금
 const balance = computed(() => {
   return totalDeposit.value - totalWithdrawal.value;
 });
 
 onMounted(() => {
-  calendarImplementation(); // 달력 구현
-  fetchTransactions(); // 입출금 내역 가져옴
+  calendarImplementation();
+  fetchTransactions();
 });
 </script>
 

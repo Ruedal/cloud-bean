@@ -37,29 +37,16 @@
             </div>
             <div class="p-1 form-group col-md-4">
               <label for="category">카테고리</label>
-              <select
-                v-model="contents.category"
-                class="form-control"
-                id="category"
-              >
+              <select v-model="contents.category" class="form-control" id="category">
                 <option value="" selected>Choose...</option>
-                <option
-                  v-for="option in categoryOptions"
-                  :key="option.value"
-                  :value="option.value"
-                >
+                <option v-for="option in categoryOptions" :key="option.value" :value="option.value">
                   {{ option.text }}
                 </option>
               </select>
             </div>
             <div class="p-1 form-group col-md-4">
               <label for="amount">금액</label>
-              <input
-                type="text"
-                class="form-control"
-                id="amount"
-                v-model="contents.amount"
-              />
+              <input type="text" class="form-control" id="amount" v-model="contents.amount" />
             </div>
           </div>
           <div class="p-1 form-group col-md-12">
@@ -76,18 +63,9 @@
       <div>
         <!-- 버튼 그룹 -->
         <div class="mt-4 form-group">
-          <button
-            type="button"
-            class="btn btn-outline-primary m-1"
-            @click="resetForm"
-          >
-            리 셋</button
+          <button type="button" class="btn btn-outline-primary m-1" @click="resetForm">리 셋</button
           ><br />
-          <button
-            type="button"
-            class="btn btn-primary m-1"
-            @click="addContentsHandler"
-          >
+          <button type="button" class="btn btn-primary m-1" @click="addContentsHandler">
             등 록
           </button>
         </div>
@@ -100,6 +78,8 @@
 import { ref, reactive, computed, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAddContentStore } from '@/stores/cloudBean.js';
+import { format } from 'date-fns';
+
 const router = useRouter();
 const AddContentStore = useAddContentStore();
 const incomeCategory = computed(() => AddContentStore.incomeCategory);
@@ -119,12 +99,20 @@ const allCategoryOptions = computed(() => ({
   입금: incomeCategory.value,
   출금: expenseCategory.value,
 }));
+
+const adjustDate = (date) => {
+  const localDate = new Date(date);
+  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
+  return localDate.toISOString().split('T')[0];
+};
+
 const addContentsHandler = () => {
   if (!contents.date || !contents.category || !contents.amount) {
     alert('모든 필드를 채워주세요');
     return;
   }
-  AddContentStore.addAC({ ...contents }, () => {});
+  const adjustedDate = adjustDate(contents.date);
+  AddContentStore.addAC({ ...contents, date: adjustedDate }, () => {});
 };
 const resetForm = () => {
   contents.id = '';
@@ -148,4 +136,18 @@ const onTransactionTypeChange = () => {
 watchEffect(() => {
   onTransactionTypeChange();
 });
+
+//날짜 선택 부분
+const attributes = ref([
+  {
+    highlight: true,
+    dates: {
+      start: new Date(2022, 10, 7),
+      repeat: {
+        every: [2, 'weeks'],
+        weekdays: 2,
+      },
+    },
+  },
+]);
 </script>
