@@ -52,6 +52,8 @@ export default {
         { text: '월별 요약', link: '/HomeSum' },
         { text: '프로필 설정', link: '/profile' },
       ],
+      profileImage: 'path_to_profile_image.jpg', // Update with the actual path to the profile image
+      profileName: 'Your Name', // Update with dynamic name if needed
     };
   },
 };
