@@ -10,11 +10,10 @@ import History from '@/components/History.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/home', name: 'Home', component: Home },
+    { path: '/', name: 'Home', component: Home },
     { path: '/tab', name: 'DTab', component: DetailTab },
     { path: '/monsum', name: 'MonSum', component: MonthSummary },
     { path: '/profile', name: 'Profile', component: Profile },
-    { path: '/history', name: 'History', component: History },
     // { path: '/Home/QBtn', name: 'home/q_btn', component: quick_btn },
   ],
 });

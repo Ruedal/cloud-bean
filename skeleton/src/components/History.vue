@@ -63,9 +63,9 @@
         </thead>
         <tbody>
           <Contents
-            v-for="content in addContent"
-            :key="content.date"
-            :content="content"
+            v-for="contents in addContent"
+            :key="contents.id"
+            :contents="contents"
           />
 
           <!-- <tr>
@@ -105,8 +105,13 @@
 import { ref, computed } from 'vue';
 import { useAddContentStore } from '@/stores/cloudBean.js';
 // import TodoItem from '@/components/TodoItem.vue';
-import AddContents from '@/components/AddContents.vue';
+import Contents from '@/components/Contents.vue';
 
+const AddContentStore = useAddContentStore();
+// const { fetchAddContents } = AddContentStore.fetchAddContents;
+const addContent = computed(() => AddContentStore.addContent);
+// 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
+// console.log(addContent);
 const attributes = ref([
   {
     highlight: true,
@@ -119,9 +124,4 @@ const attributes = ref([
     },
   },
 ]);
-
-const AddContentStore = useAddContentStore();
-// const { fetchAddContents } = AddContentStore.fetchAddContents;
-const addContent = computed(() => AddContentStore.addContent);
-// 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
 </script>

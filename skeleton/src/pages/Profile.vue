@@ -1,5 +1,3 @@
-<template>
-  <div>profile</div>
-</template>
+<template></template>
 
 <script setup></script>
