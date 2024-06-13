@@ -22,5 +22,4 @@
         </div>
     </nav>
 </template>
-
 <script setup></script>

@@ -1,12 +1,12 @@
 <!-- detail_tab 1번 컴포넌트 -->
 
 <template>
-    <div>
+    <div class="rounded-4 bg-light mb-4 mt-3 p-1">
         <div class="row">
             <!-- 날짜  -->
-            <div id="cal">
-                <span class="font-semibold">날짜 선택</span>
-                <VDatePicker v-model="date">
+            <div id="cal" class="d-flex align-items-center gap-3">
+                <span class="font-bold">날짜 선택</span>
+                <VDatePicker class="" v-model="date">
                     <template #default="{ togglePopover }">
                         <button class="px-3 py-2 bg-primary text-white font-semibold rounded-4" @click="togglePopover">Select date</button>
                     </template>
@@ -20,21 +20,19 @@
                 <div class="row">
                     <div class="form-row d-flex">
                         <div class="p-1 form-group col-md-4">
-                            <label for="">입금/출금</label>
-                            <select class="form-control">
-                                <option selected>입금</option>
-                                <option>출금</option>
+                            <label for="transactionType">입금/출금</label>
+                            <select v-model="selectedTransactionType" @change="onTransactionTypeChange" class="form-control" id="transactionType">
+                                <option value="입금">입금</option>
+                                <option value="출금">출금</option>
                             </select>
                         </div>
                         <div class="p-1 form-group col-md-4">
-                            <label for="inputState">카테고리</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
-                                <option>...</option>
+                            <label for="category">카테고리</label>
+                            <select v-model="selectedCategory" class="form-control" id="category">
+                                <option value="" selected>Choose...</option>
+                                <option v-for="option in categoryOptions" :key="option.value" :value="option.value">
+                                    {{ option.text }}
+                                </option>
                             </select>
                         </div>
                         <div class="p-1 form-group col-md-4">
@@ -54,7 +52,6 @@
             <div>
                 <!-- 버튼 그룹 -->
                 <div class="mt-4 form-group">
-                    <div class=""></div>
                     <div>
                         <button type="button" class="btn btn-outline-primary m-1">리 셋</button><br />
                         <button type="button" class="btn btn-outline-primary m-1">삭 제</button><br />
@@ -66,7 +63,7 @@
     </div>
 </template>
 <script setup>
-import { inject, reactive } from 'vue';
+import { inject, reactive, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
 
@@ -94,7 +91,34 @@ const router = useRouter();
 // }
 // addTodo({ ...todoItem });
 // router.push('/todos');
-const date = function () {
-    new Date.getDate();
+
+const selectedTransactionType = ref('입금');
+const selectedCategory = ref('');
+const categoryOptions = ref([]);
+
+const allCategoryOptions = reactive({
+    입금: [
+        { value: 'salary', text: '월급' },
+        { value: 'allowance', text: '용돈' },
+        { value: 'rent', text: '월세' },
+        { value: 'interest', text: '이자' },
+    ],
+    출금: [
+        { value: 'food', text: '식비' },
+        { value: 'transport', text: '교통비' },
+        { value: 'dues', text: '공과금' },
+        { value: 'congrats', text: '경조사비' },
+        { value: 'dog_supplies', text: '애견용품' },
+    ],
+});
+
+const onTransactionTypeChange = () => {
+    categoryOptions.value = allCategoryOptions[selectedTransactionType.value] || [];
+    selectedCategory.value = ''; // 카테고리 선택 초기화
 };
+
+// 초기 로드 시 카테고리 옵션 설정
+watchEffect(() => {
+    onTransactionTypeChange();
+});
 </script>
