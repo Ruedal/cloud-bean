@@ -4,7 +4,6 @@ import Home from '@/pages/Home.vue';
 import DetailTab from '@/pages/DetailTab.vue';
 import MonthSummary from '@/pages/MonthSummary.vue';
 import Profile from '@/pages/Profile.vue';
-import History from '@/components/History.vue';
 // import quick_btn from '@/pages/quick_btn.vue';
 // quick_btn은 마지막에 구현
 const router = createRouter({
