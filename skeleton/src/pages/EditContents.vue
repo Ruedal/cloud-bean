@@ -42,11 +42,7 @@
               </div>
               <div class="p-1 form-group col-md-4">
                 <label for="category">카테고리</label>
-                <select
-                  v-model="contents.category"
-                  class="form-control"
-                  id="category"
-                >
+                <select v-model="contents.category" class="form-control" id="category">
                   <option value="" selected>Choose...</option>
                   <option
                     v-for="option in categoryOptions"
@@ -59,12 +55,7 @@
               </div>
               <div class="p-1 form-group col-md-4">
                 <label for="amount">금액</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="amount"
-                  v-model="contents.amount"
-                />
+                <input type="text" class="form-control" id="amount" v-model="contents.amount" />
               </div>
             </div>
             <div class="p-1 form-group col-md-12">
@@ -81,27 +72,15 @@
         <div>
           <!-- 버튼 그룹 -->
           <div class="mt-4 form-group">
-            <button
-              type="button"
-              class="btn btn-outline-primary m-1"
-              @click="resetForm"
-            >
+            <button type="button" class="btn btn-outline-primary m-1" @click="resetForm">
               리 셋
             </button>
             <br />
-            <button
-              type="button"
-              class="btn btn-primary m-1"
-              @click="router.push('/tab')"
-            >
+            <button type="button" class="btn btn-primary m-1" @click="router.push('/tab')">
               취 소
             </button>
             <br />
-            <button
-              type="button"
-              class="btn btn-primary m-1"
-              @click="updateACHandler"
-            >
+            <button type="button" class="btn btn-primary m-1" @click="updateACHandler">
               수 정
             </button>
           </div>
@@ -115,6 +94,7 @@
 import { ref, reactive, computed, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAddContentStore } from '@/stores/cloudBean.js';
+import { format } from 'date-fns';
 
 const router = useRouter();
 const currentRoute = useRoute();
@@ -122,9 +102,7 @@ const AddContentStore = useAddContentStore();
 const incomeCategory = computed(() => AddContentStore.incomeCategory);
 const expenseCategory = computed(() => AddContentStore.expenseCategory);
 
-const matchedAC = AddContentStore.addContent.find(
-  (item) => item.id === currentRoute.params.id
-);
+const matchedAC = AddContentStore.addContent.find((item) => item.id === currentRoute.params.id);
 if (!matchedAC) {
   router.push('/tab');
 }
@@ -138,13 +116,20 @@ const allCategoryOptions = computed(() => ({
   출금: expenseCategory.value,
 }));
 
+const adjustDate = (date) => {
+  const localDate = new Date(date);
+  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
+  return localDate.toISOString().split('T')[0];
+};
+
 const updateACHandler = () => {
   if (!contents.date || !contents.category || !contents.amount) {
     alert('모든 필드를 채워주세요.');
     return;
   }
 
-  AddContentStore.updateAC({ ...contents }, () => {
+  const adjustedDate = adjustDate(contents.date);
+  AddContentStore.updateAC({ ...contents, date: adjustedDate }, () => {
     router.push('/tab');
   });
 };
@@ -166,4 +151,18 @@ const onTransactionTypeChange = () => {
 watchEffect(() => {
   onTransactionTypeChange();
 });
+
+//날짜 선택 부분
+const attributes = ref([
+  {
+    highlight: true,
+    dates: {
+      start: new Date(2022, 10, 7),
+      repeat: {
+        every: [2, 'weeks'],
+        weekdays: 2,
+      },
+    },
+  },
+]);
 </script>
