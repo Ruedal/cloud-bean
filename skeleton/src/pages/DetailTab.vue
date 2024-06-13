@@ -2,4 +2,6 @@
   <div>detailTab</div>
 </template>
 
-<script setup></script>
+<script setup>
+import History from '@/components/History.vue';
+</script>

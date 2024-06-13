@@ -105,7 +105,7 @@
 import { ref, computed } from 'vue';
 import { useAddContentStore } from '@/stores/cloudBean.js';
 // import TodoItem from '@/components/TodoItem.vue';
-import Contents from '@/components/Contents.vue';
+import AddContents from '@/components/AddContents.vue';
 
 const attributes = ref([
   {
