@@ -102,6 +102,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { ref, reactive, computed, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
@@ -117,8 +118,9 @@ const contents = reactive({
   amount: '',
   memo: '',
 });
-// const selectedTransactionType = ref('입금');
+
 const categoryOptions = ref([]);
+
 const allCategoryOptions = computed(() => ({
   입금: incomeCategory.value,
   출금: expenseCategory.value,
@@ -136,12 +138,13 @@ const resetForm = () => {
   contents.category = '';
   contents.amount = '';
   contents.memo = '';
-  // selectedTransactionType.value = '입금';
   onTransactionTypeChange();
 };
+
 const deleteContent = () => {
   resetForm();
 };
+
 const onTransactionTypeChange = () => {
   categoryOptions.value = allCategoryOptions.value[contents.type] || [];
   contents.category = ''; // 카테고리 선택 초기화
