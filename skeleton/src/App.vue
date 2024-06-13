@@ -26,8 +26,12 @@ import { useAddContentStore } from '@/stores/cloudBean.js';
 
 const AddContentStore = useAddContentStore();
 const fetchAddContent = AddContentStore.fetchAddContents;
+const fetchIncomeCategory = AddContentStore.fetchIncomeCategory;
+const fetchExpenseCategory = AddContentStore.fetchExpenseCategory;
 onMounted(() => {
   fetchAddContent();
+  fetchIncomeCategory();
+  fetchExpenseCategory();
 });
 </script>
 
