@@ -33,6 +33,7 @@ onMounted(() => {
   fetchIncomeCategory();
   fetchExpenseCategory();
 });
+console.log(fetchIncomeCategory);
 </script>
 
 <style>

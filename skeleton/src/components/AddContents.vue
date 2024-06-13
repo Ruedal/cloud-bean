@@ -85,13 +85,6 @@
           ><br />
           <button
             type="button"
-            class="btn btn-outline-primary m-1"
-            @click="deleteContent"
-          >
-            삭 제</button
-          ><br />
-          <button
-            type="button"
             class="btn btn-primary m-1"
             @click="addContentsHandler"
           >
@@ -112,6 +105,7 @@ const AddContentStore = useAddContentStore();
 const incomeCategory = computed(() => AddContentStore.incomeCategory);
 const expenseCategory = computed(() => AddContentStore.expenseCategory);
 const contents = reactive({
+  id: '',
   date: '',
   type: '',
   category: '',
@@ -133,6 +127,7 @@ const addContentsHandler = () => {
   AddContentStore.addAC({ ...contents }, () => {});
 };
 const resetForm = () => {
+  contents.id = '';
   contents.date = '';
   contents.type = '';
   contents.category = '';
