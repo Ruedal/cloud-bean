@@ -43,7 +43,7 @@
             </th>
             <th class="text-end">수입</th>
             <th class="text-end">지출</th>
-            <th>메모</th>
+            <th class="text-center">메모</th>
           </tr>
         </thead>
         <tbody class="table-tbody">
