@@ -30,7 +30,11 @@
             &lt;
           </button>
           <h5 class="card-title m-0 fw-bold fs-3">{{ calendarHeader }}</h5>
-          <button type="button" class="btn btn-light btn-outline-secondary" @click="changeMonth(1)">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary"
+            @click="changeMonth(1)"
+          >
             &gt;
           </button>
         </div>
@@ -176,7 +180,8 @@ const calendarImplementation = () => {
 // 마지막 주가 7일이 아니면 남은 칸 빈칸으로 7칸까지 출력
 const addLastWeekEmptyDays = () => {
   const daysLastIndex = days.value.length - 1;
-  if (days.value[daysLastIndex].length !== 7) days.value[daysLastIndex].length = 7; // 마지막 주가 7일이 아니면 빈 칸 추가
+  if (days.value[daysLastIndex].length !== 7)
+    days.value[daysLastIndex].length = 7; // 마지막 주가 7일이 아니면 빈 칸 추가
 };
 
 const changeMonth = (val) => {
@@ -187,7 +192,10 @@ const changeMonth = (val) => {
 
 // 당월 입금 총액 계산, 없으면 0 리턴
 const totalDeposit = computed(() => {
-  if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
+  if (
+    !transactions.value[year.value] ||
+    !transactions.value[year.value][month.value]
+  ) {
     return 0;
   }
   // acc에 입금 내역 더해줌
@@ -198,7 +206,10 @@ const totalDeposit = computed(() => {
 });
 // 당월 출금 총액 계산, 없으면 0 리턴
 const totalWithdrawal = computed(() => {
-  if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
+  if (
+    !transactions.value[year.value] ||
+    !transactions.value[year.value][month.value]
+  ) {
     return 0;
   }
   // acc에 출금 내역 더해줌

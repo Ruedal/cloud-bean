@@ -17,16 +17,25 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import Head from '@/components/Head.vue';
 import Side from '@/components/Side.vue';
 // import History from '@/components/History.vue';
 // import Calendar from '@/components/Calendar.vue';
-// import { useAddContentStore } from '@/stores/cloudBean.js';
+import { useAddContentStore } from '@/stores/cloudBean.js';
 
-// const AddContentStore = useAddContentStore();
-// const fetchTodoList = todoListStore.fetchTodoList;
-// fetchTodoList();
+const AddContentStore = useAddContentStore();
+const fetchAddContent = AddContentStore.fetchAddContents;
+const fetchIncomeCategory = AddContentStore.fetchIncomeCategory;
+const fetchExpenseCategory = AddContentStore.fetchExpenseCategory;
+
+onMounted(() => {
+    fetchAddContent();
+    fetchIncomeCategory();
+    fetchExpenseCategory();
+});
 </script>
+
 <style>
 #top {
     margin-top: 3px;

@@ -1,51 +1,141 @@
 {
-  "addContent": [
-    {
-      "id": "2",
-      "date": "2",
-      "type": "income",
-      "category": "월세",
-      "amount": "",
-      "memo": "메모2"
-    },
-    {
-      "id": "a34e",
-      "date": "24.6.10",
-      "type": "expense",
-      "category": "식비",
-      "amount": "25000",
-      "memo": "족발 회식"
-    }
-  ],
-  "type": [{ "income": "" }, { "expense": "" }],
+    "addContent": [
+        {
+            "id": "2",
+            "date": "2",
+            "type": "income",
+            "category": "월세",
+            "amount": "123123",
+            "memo": "메모2"
+        },
+        {
+            "id": "a34e",
+            "date": "24.6.10",
+            "type": "expense",
+            "category": "식비",
+            "amount": "25000",
+            "memo": "족발 회식"
+        },
+        {
+            "id": "8575",
+            "date": "2024-10-12",
+            "type": "수입",
+            "category": "월세",
+            "amount": "1,200,000",
+            "memo": "다음 달 월세 올려야겠다"
+        },
+        {
+            "id": "ce41",
+            "date": "2024-10-13",
+            "type": "지출",
+            "category": "교통비",
+            "amount": "50,000",
+            "memo": "다음 달엔 걸어 다녀야지"
+        },
+        {
+            "id": "d706",
+            "date": "2024-06-11T15:00:00.000Z",
+            "type": "",
+            "category": "",
+            "amount": "12000",
+            "memo": "테스트"
+        },
+        {
+            "id": "9221",
+            "date": "2024-06-12T15:00:00.000Z",
+            "type": "",
+            "category": "",
+            "amount": "12000",
+            "memo": "테스트2"
+        },
+        {
+            "id": "dce7",
+            "date": "2024-06-13T15:00:00.000Z",
+            "type": "",
+            "category": "",
+            "amount": "12000",
+            "memo": "테스트2"
+        },
+        {
+            "id": "2e98",
+            "date": "2024-06-14T15:00:00.000Z",
+            "type": "",
+            "category": "",
+            "amount": "12000",
+            "memo": "테스트2"
+        },
+        {
+            "id": "97b4",
+            "date": "2024-06-30T15:00:00.000Z",
+            "type": "",
+            "category": "",
+            "amount": "12000",
+            "memo": "테스트2"
+        },
 
-  "incomeCategory": [
-    { "name": "월급", "월급": "" },
-    { "name": "용돈", "용돈": "" },
-    { "name": "이자", "이자": "" },
-    { "name": "월세", "월세": "" }
-  ],
-
-  "expenseCategory": [
-    { "name": "식비", "식비": "" },
-    { "name": "교통비", "교통비": "" },
-    { "name": "공과금", "공과금": "" },
-    { "name": "경조사비", "경조사비": "" },
-    { "name": "애견용품", "애견용품": "" }
-  ],
-
-  "periodicExpense": [
-    {
-      "date": "",
-      "type": "",
-      "category": "",
-      "amount": ""
-    }
-  ],
-  "users": [
-    {
-      "name": "",
-      "pic": ""
-    }
-  ]
+        {
+            "id": "6972",
+            "date": "2024-06-18T15:00:00.000Z",
+            "type": "",
+            "category": "공과금",
+            "amount": "12121",
+            "memo": "11111"
+        }
+    ],
+    "incomeCategory": [
+        {
+            "value": "월급",
+            "text": "월급"
+        },
+        {
+            "value": "용돈",
+            "text": "용돈"
+        },
+        {
+            "value": "월세",
+            "text": "월세"
+        },
+        {
+            "value": "이자",
+            "text": "이자"
+        }
+    ],
+    "expenseCategory": [
+        {
+            "value": "식비",
+            "text": "식비"
+        },
+        {
+            "value": "교통비",
+            "text": "교통비"
+        },
+        {
+            "value": "공과금",
+            "text": "공과금"
+        },
+        {
+            "value": "경조사비",
+            "text": "경조사비"
+        },
+        {
+            "value": "애견용품",
+            "text": "애견용품"
+        }
+    ],
+    "periodicExpense": [
+        {
+            "date": "",
+            "type": "",
+            "category": "",
+            "amount": "",
+            "id": "4881"
+        }
+    ],
+    "users": [
+        {
+            "name": "",
+            "pic": "",
+            "id": "8a6e"
+        }
+    ]
 }

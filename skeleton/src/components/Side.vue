@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar flex-column navbar-expand-lg bg-dark navbar-dark mt-1 rounded-4">
+    <nav class="navbar flex-column navbar-expand-lg bg-dark navbar-dark mt-1 rounded-4" style="height: 100%">
         <span class="navbar-brand">목록</span>
         <button class="navbar-toggler" type="button" @click="changeIsNavShow">
             <span class="navbar-toggler-icon"></span>
@@ -22,4 +22,5 @@
         </div>
     </nav>
 </template>
+
 <script setup></script>

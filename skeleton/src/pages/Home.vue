@@ -1,7 +1,9 @@
 <template>
     <div>
         <div>
-            <Calendar />
+            <div>
+                <Calendar />
+            </div>
         </div>
     </div>
 </template>
