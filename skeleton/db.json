@@ -103,8 +103,9 @@
   ],
   "users": [
     {
+      "image": "",
       "name": "",
-      "pic": "",
+      "email": "",
       "id": "8a6e"
     }
   ]
