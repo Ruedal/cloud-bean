@@ -16,7 +16,13 @@
           <div class="card-body"></div>
         </div>
       </label>
-      <input type="file" id="image" @change="onFilechange" accept="image/*" />
+      <input
+        type="file"
+        id="image"
+        @change="onFilechange"
+        accept="image/*"
+        style="margin-left: 90px"
+      />
       <label for="name">이름 :</label>
       <input type="text" id="name" v-model="profile.name" required />
 
