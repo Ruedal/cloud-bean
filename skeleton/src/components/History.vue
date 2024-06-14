@@ -44,15 +44,7 @@
             <th class="text-end">수입</th>
             <th class="text-end">지출</th>
             <th class="text-center">메모</th>
-            <td class="text-center">
-              <span
-                class="badge bg-dark text-light pointer m-1"
-                @click="deleteAC(contents.id)"
-                id="delete"
-              >
-                삭제
-              </span>
-            </td>
+            <th class="text-center">삭제</th>
           </tr>
         </thead>
         <tbody class="">

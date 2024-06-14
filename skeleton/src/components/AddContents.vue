@@ -93,7 +93,6 @@
         </button>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -117,23 +116,23 @@ const contents = reactive({
 const categoryOptions = ref([]);
 
 const allCategoryOptions = computed(() => ({
-  입금: incomeCategory.value,
-  출금: expenseCategory.value,
+    입금: incomeCategory.value,
+    출금: expenseCategory.value,
 }));
 
 const adjustDate = (date) => {
-  const localDate = new Date(date);
-  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
-  return localDate.toISOString().split('T')[0];
+    const localDate = new Date(date);
+    localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
+    return localDate.toISOString().split('T')[0];
 };
 
 const addContentsHandler = () => {
-  if (!contents.date || !contents.category || !contents.amount) {
-    alert('모든 필드를 채워주세요');
-    return;
-  }
-  const adjustedDate = adjustDate(contents.date);
-  AddContentStore.addAC({ ...contents, date: adjustedDate }, () => {});
+    if (!contents.date || !contents.category || !contents.amount) {
+        alert('모든 필드를 채워주세요');
+        return;
+    }
+    const adjustedDate = adjustDate(contents.date);
+    AddContentStore.addAC({ ...contents, date: adjustedDate }, () => {});
 };
 const resetForm = () => {
   contents.date = '';
@@ -145,16 +144,16 @@ const resetForm = () => {
 };
 
 const deleteContent = () => {
-  resetForm();
+    resetForm();
 };
 
 const onTransactionTypeChange = () => {
-  categoryOptions.value = allCategoryOptions.value[contents.type] || [];
-  contents.category = ''; // 카테고리 선택 초기화
+    categoryOptions.value = allCategoryOptions.value[contents.type] || [];
+    contents.category = ''; // 카테고리 선택 초기화
 };
 // 초기 로드 시 카테고리 옵션 설정
 watchEffect(() => {
-  onTransactionTypeChange();
+    onTransactionTypeChange();
 });
 </script>
 <style>

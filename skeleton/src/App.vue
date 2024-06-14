@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="container">
     <div id="top">
       <Head />
@@ -10,10 +11,23 @@
         </div>
         <div id="right" class="col-md-10">
           <router-view></router-view>
+=======
+    <div class="container">
+        <div id="top">
+            <Head />
         </div>
-      </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="left" class="mt-2 col-md-2">
+                    <Side />
+                </div>
+                <div id="right" class="col-md-10">
+                    <router-view></router-view>
+                </div>
+            </div>
+>>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
+        </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -30,21 +44,26 @@ const fetchIncomeCategory = AddContentStore.fetchIncomeCategory;
 const fetchExpenseCategory = AddContentStore.fetchExpenseCategory;
 
 onMounted(() => {
-  fetchAddContent();
-  fetchIncomeCategory();
-  fetchExpenseCategory();
+    fetchAddContent();
+    fetchIncomeCategory();
+    fetchExpenseCategory();
 });
 console.log(fetchIncomeCategory);
 </script>
 
 <style>
 #top {
+<<<<<<< HEAD
   margin-top: 10px;
+=======
+    margin-top: 10px;
+>>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 }
 #left {
-  margin-left: -10px;
+    margin-left: -10px;
 }
 #right {
+<<<<<<< HEAD
   width: 85%;
   margin-left: -15px;
   margin-top: -11px;
@@ -52,5 +71,14 @@ console.log(fetchIncomeCategory);
 }
 #top {
   margin-right: 30px;
+=======
+    width: 85%;
+    margin-left: -15px;
+    margin-top: -11px;
+    margin-bottom: -10px;
+}
+#top {
+    margin-right: 30px;
+>>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 }
 </style>
