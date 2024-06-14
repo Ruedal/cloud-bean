@@ -60,9 +60,9 @@ export const useAddContentStore = defineStore('addContent', () => {
     };
 
     // 새로운 AddContent를 추가합니다.
-    const addAC = async ({ date, type, category, amount, memo }, successCallback) => {
+    const addAC = async ({ id, date, type, category, amount, memo }, successCallback) => {
         try {
-            const payload = { date, type, category, amount, memo };
+            const payload = { id, date, type, category, amount, memo };
             const response = await axios.post(BASEURI, payload);
             if (response.status === 201) {
                 state.addContent.push({ ...response.data });
@@ -74,13 +74,28 @@ export const useAddContentStore = defineStore('addContent', () => {
             alert('에러발생 : ' + error);
         }
     };
-
-    // 기존 TodoItem을 삭제합니다.
+    // 기존 addContent를 변경합니다.
+    const updateAC = async ({ id, date, type, category, amount, memo }, successCallback) => {
+        try {
+            const payload = { id, date, type, category, amount, memo };
+            const response = await axios.put(BASEURI + `/${id}`, payload);
+            if (response.status === 200) {
+                let index = state.addContent.findIndex((AC) => AC.id === id);
+                state.addContent[index] = payload;
+                successCallback();
+            } else {
+                alert('Todo 변경 실패');
+            }
+        } catch (error) {
+            alert('에러발생 : ' + error);
+        }
+    };
+    // 기존 addContent를 삭제합니다.
     const deleteAC = async (id) => {
         try {
             const response = await axios.delete(BASEURI + `/${id}`);
             if (response.status === 200) {
-                let index = state.addContent.findIndex((date) => date.id === id);
+                let index = state.addContent.findIndex((AC) => AC.id === id);
                 state.addContent.splice(index, 1);
             } else {
                 alert('Todo 삭제 실패');
@@ -89,21 +104,6 @@ export const useAddContentStore = defineStore('addContent', () => {
             alert('에러발생 : ' + error);
         }
     };
-    // const addContents = (todo) => {
-    //   state.addContent.push({ id: new Date().getTime(), todo, done: false });
-    // };
-
-    // const toggleDone = (id) => {
-    //   let index = state.addContent.findIndex((todo) => todo.id === id);
-    //   state.addContent[index].done = !state.addContent[index].done;
-    // };
-    // 토글 기능 사용하려면 addContent에 부울린 추가
-
-    // const deleteContents = (id) => {
-    //   let index = state.addContent.findIndex((todo) => todo.id === id);
-    //   state.addContent.splice(index, 1);
-    // };
-
     // const doneCount = computed(() => {
     //   return state.todoList.filter((todoItem) => todoItem.done === true).length;
     // });
@@ -118,10 +118,11 @@ export const useAddContentStore = defineStore('addContent', () => {
         addContent,
         incomeCategory,
         expenseCategory,
+        fetchAddContents,
         fetchIncomeCategory,
         fetchExpenseCategory,
-        fetchAddContents,
         addAC,
+        updateAC,
         deleteAC,
     };
 });
