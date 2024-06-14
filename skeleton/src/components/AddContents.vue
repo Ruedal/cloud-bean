@@ -1,15 +1,14 @@
 <!-- detail_tab 1번 컴포넌트 -->
-
 <template>
-  <div>
+  <div class="rounded-4 bg-light mb-4 mt-3 p-1">
     <div class="row">
       <!-- 날짜  -->
-      <div id="cal">
-        <span class="font-semibold">날짜 선택</span>
+      <div id="cal" class="d-flex align-items-center gap-3">
+        <span class="font-bold">날짜 선택</span>
         <VDatePicker v-model="contents.date">
           <template #default="{ togglePopover }">
             <button
-              class="px-3 py-2 bg-primary text-white font-semibold rounded-4"
+              class="px-3 py-2 bg-dark text-white font-semibold rounded-4"
               @click="togglePopover"
             >
               Select date
@@ -25,80 +24,120 @@
         <div class="row">
           <div class="form-row d-flex">
             <div class="p-1 form-group col-md-4">
-              <label for="">입금/출금</label>
-              <select class="form-control" v-model="contents.type">
-                <option selected>입금</option>
-                <option>출금</option>
-              </select>
-            </div>
-            <div class="p-1 form-group col-md-4">
-              <label for="inputState">카테고리</label>
+              <label for="transactionType">입금/출금</label>
               <select
-                id="inputState"
+                v-model="contents.type"
+                @change="onTransactionTypeChange"
                 class="form-control"
-                v-model="contents.category"
+                id="transactionType"
               >
-                <option selected>Choose...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
+                <option value="입금">입금</option>
+                <option value="출금">출금</option>
               </select>
             </div>
             <div class="p-1 form-group col-md-4">
-              <label for="inputZip">금액</label>
-              <input
-                type="text"
-                class="form-control"
-                id="inputZip"
-                v-model="contents.amount"
-              />
+              <label for="category">카테고리</label>
+              <select v-model="contents.category" class="form-control" id="category">
+                <option value="" selected>Choose...</option>
+                <option v-for="option in categoryOptions" :key="option.value" :value="option.value">
+                  {{ option.text }}
+                </option>
+              </select>
+            </div>
+            <div class="p-1 form-group col-md-4">
+              <label for="amount">금액</label>
+              <input type="text" class="form-control" id="amount" v-model="contents.amount" />
             </div>
           </div>
-
-          <div class="">
-            <div class="p-1 form-group col-md-12">
-              <label>메모</label><br />
-              <textarea
-                row="3"
-                class="form-control"
-                placeholder="메모를 입력하세요"
-                v-model="contents.memo"
-              ></textarea>
-            </div>
+          <div class="p-1 form-group col-md-12">
+            <label>메모</label><br />
+            <textarea
+              row="3"
+              class="form-control"
+              placeholder="메모를 입력하세요"
+              v-model="contents.memo"
+            ></textarea>
           </div>
         </div>
       </div>
       <div>
         <!-- 버튼 그룹 -->
         <div class="mt-4 form-group">
-          <div class=""></div>
-          <div>
-            <button type="button" class="btn btn-outline-primary m-1">
-              리 셋</button
-            ><br />
-            <button type="button" class="btn btn-outline-primary m-1">
-              삭 제</button
-            ><br />
-            <button
-              type="button"
-              class="btn btn-primary m-1"
-              @click="addContentsHandler"
-            >
-              등 록
-            </button>
-          </div>
+          <button type="button" class="btn btn-outline-primary m-1" @click="resetForm">리 셋</button
+          ><br />
+          <button type="button" class="btn btn-primary m-1" @click="addContentsHandler">
+            등 록
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
-<script setup>
-import { inject, reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
 
+<script setup>
+import { ref, reactive, computed, watchEffect } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAddContentStore } from '@/stores/cloudBean.js';
+import { format } from 'date-fns';
+
+const router = useRouter();
+const AddContentStore = useAddContentStore();
+const incomeCategory = computed(() => AddContentStore.incomeCategory);
+const expenseCategory = computed(() => AddContentStore.expenseCategory);
+const contents = reactive({
+  id: '',
+  date: '',
+  type: '',
+  category: '',
+  amount: '',
+  memo: '',
+});
+
+const categoryOptions = ref([]);
+
+const allCategoryOptions = computed(() => ({
+  입금: incomeCategory.value,
+  출금: expenseCategory.value,
+}));
+
+const adjustDate = (date) => {
+  const localDate = new Date(date);
+  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
+  return localDate.toISOString().split('T')[0];
+};
+
+const addContentsHandler = () => {
+  if (!contents.date || !contents.category || !contents.amount) {
+    alert('모든 필드를 채워주세요');
+    return;
+  }
+  const adjustedDate = adjustDate(contents.date);
+  AddContentStore.addAC({ ...contents, date: adjustedDate }, () => {});
+};
+const resetForm = () => {
+  contents.id = '';
+  contents.date = '';
+  contents.type = '';
+  contents.category = '';
+  contents.amount = '';
+  contents.memo = '';
+  onTransactionTypeChange();
+};
+
+const deleteContent = () => {
+  resetForm();
+};
+
+const onTransactionTypeChange = () => {
+  categoryOptions.value = allCategoryOptions.value[contents.type] || [];
+  contents.category = ''; // 카테고리 선택 초기화
+};
+// 초기 로드 시 카테고리 옵션 설정
+watchEffect(() => {
+  onTransactionTypeChange();
+});
+
+//날짜 선택 부분
 const attributes = ref([
   {
     highlight: true,
@@ -111,38 +150,4 @@ const attributes = ref([
     },
   },
 ]);
-
-const router = useRouter();
-// const { addTodo } = inject('actions');
-// const todoItem = reactive({ todo: '', desc: '' });
-// const addTodoHandler = () => {
-// let { todo } = todoItem;
-// if (!todo || todo.trim() === '') {
-//     alert('할일은 반드시 입력해야 합니다');
-//     return;
-// }
-// addTodo({ ...todoItem });
-// router.push('/todos');
-const date = function () {
-  new Date.getDate();
-};
-import { useAddContentStore } from '@/stores/cloudBean.js';
-
-defineProps({
-  addContent: { Type: Object, required: true },
-});
-// , fetchAddContents
-const { addAC } = useAddContentStore();
-const contents = reactive({
-  date: '',
-  type: '',
-  category: '',
-  amount: '',
-  memo: '',
-});
-const addContentsHandler = () => {
-  // 예외처리 추가하기(빈칸처리)
-  addAC({ ...contents }, () => {});
-  // fetchAddContents();
-};
 </script>

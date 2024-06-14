@@ -7,7 +7,7 @@
       <!-- 조건문으로 날짜와 카테고리를 &&사용해서 동시 조건 가능할것 같음 -->
       <table class="table table-sm">
         <thead class="table-active">
-          <tr class="text-center">
+          <tr class="text-cente table-thead-tr">
             <th>
               <div id="cal">
                 <VDatePicker v-model="date">
@@ -18,21 +18,6 @@
                   </template>
                 </VDatePicker>
               </div>
-              <!-- <select class="form-select form-select-sm text-center">
-                <option selected disabled>날짜</option>
-                <option value="1m">1월</option>
-                <option value="2m">2월</option>
-                <option value="3m">3월</option>
-                <option value="4m">4월</option>
-                <option value="5m">5월</option>
-                <option value="6m">6월</option>
-                <option value="7m">7월</option>
-                <option value="8m">8월</option>
-                <option value="9m">9월</option>
-                <option value="10m">10월</option>
-                <option value="11m">11월</option>
-                <option value="12m">12월</option>
-              </select> -->
             </th>
             <th>
               <select
@@ -58,39 +43,15 @@
             </th>
             <th class="text-end">수입</th>
             <th class="text-end">지출</th>
-            <th>메모</th>
+            <th class="text-center">메모</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="table-tbody">
           <Contents
             v-for="contents in addContent"
             :key="contents.id"
             :contents="contents"
           />
-
-          <!-- <tr>
-            <td class="text-center">2024-06-12</td>
-            <td class="text-center">월급</td>
-            <td class="text-end">4,213,000</td>
-            <td class="text-end">0</td>
-            <td class="text-center">추가 수당 받아서 기분이 좋다.</td>
-          </tr>
-          <tr>
-            <td class="text-center">2024-06-12</td>
-            <td class="text-center">식비</td>
-            <td class="text-end">0</td>
-            <td class="text-end">40,000</td>
-            <td class="text-center">기분이 좋아서 저녁에 족발 먹었다.</td>
-          </tr>
-          <tr>
-            <td class="text-center">2024-06-13</td>
-            <td class="text-center">애견용품</td>
-            <td class="text-end">0</td>
-            <td class="text-end">50,000</td>
-            <td class="text-center">
-              사료, 간식, 배변패드, 장난감까지 알차게 구매했다.
-            </td>
-          </tr> -->
         </tbody>
       </table>
     </div>
@@ -102,13 +63,11 @@
 </template>
 
 <script setup>
+import Contents from '@/components/Contents.vue';
 import { ref, computed } from 'vue';
 import { useAddContentStore } from '@/stores/cloudBean.js';
-// import TodoItem from '@/components/TodoItem.vue';
-import Contents from '@/components/Contents.vue';
 
 const AddContentStore = useAddContentStore();
-// const { fetchAddContents } = AddContentStore.fetchAddContents;
 const addContent = computed(() => AddContentStore.addContent);
 // 임포트 해야할 것들 AddContents, incomeCategory, expenseCategory
 // console.log(addContent);
@@ -125,3 +84,14 @@ const attributes = ref([
   },
 ]);
 </script>
+<style>
+/* .table-tbody {
+  display: block;
+  max-height: 800px;
+  overflow-y: scroll;
+}
+.table-thead-tr {
+  display: table;
+  width: 100%;
+} */
+</style>

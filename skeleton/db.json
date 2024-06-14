@@ -1,95 +1,93 @@
 {
   "addContent": [
     {
-      "id": "2",
-      "date": "2",
-      "type": "income",
-      "category": "월세",
-      "amount": "",
-      "memo": "메모2"
+      "id": "eafc",
+      "date": "2024-06-12",
+      "type": "입금",
+      "category": "이자",
+      "amount": "200000",
+      "memo": "이자가 이십만원?"
     },
     {
-      "id": "a34e",
-      "date": "24.6.10",
-      "type": "expense",
+      "id": "598e",
+      "date": "2024-06-04",
+      "type": "출금",
       "category": "식비",
-      "amount": "25000",
-      "memo": "족발 회식"
+      "amount": "60000",
+      "memo": "족발 먹고싶다"
     },
     {
-      "id": "8575",
-      "date": "2024-10-12",
-      "type": "수입",
-      "category": "월세",
-      "amount": "1,200,000",
-      "memo": "다음 달 월세 올려야겠다"
-    },
-    {
-      "id": "ce41",
-      "date": "2024-10-13",
-      "type": "지출",
+      "id": "0a04",
+      "date": "2024-06-07",
+      "type": "출금",
       "category": "교통비",
-      "amount": "50,000",
-      "memo": "다음 달엔 걸어 다녀야지"
-    }
-  ],
-  "type": [
-    {
-      "income": "",
-      "id": "8632"
+      "amount": "50000",
+      "memo": "월 교통카드 충전비"
     },
     {
-      "expense": "",
-      "id": "60c7"
+      "id": "",
+      "date": "2024-06-23",
+      "type": "입금",
+      "category": "월급",
+      "amount": "1000",
+      "memo": "테스트"
+    },
+    {
+      "id": "",
+      "date": "2024-06-10",
+      "type": "출금",
+      "category": "식비",
+      "amount": "5500",
+      "memo": "짜계치"
     }
   ],
   "incomeCategory": [
     {
-      "name": "월급",
-      "월급": "",
-      "id": "afab"
+      "value": "월급",
+      "text": "월급",
+      "id": "87d5"
     },
     {
-      "name": "용돈",
-      "용돈": "",
-      "id": "686c"
+      "value": "용돈",
+      "text": "용돈",
+      "id": "5b3e"
     },
     {
-      "name": "이자",
-      "이자": "",
-      "id": "d7cf"
+      "value": "월세",
+      "text": "월세",
+      "id": "ec4e"
     },
     {
-      "name": "월세",
-      "월세": "",
-      "id": "3cbd"
+      "value": "이자",
+      "text": "이자",
+      "id": "b3b6"
     }
   ],
   "expenseCategory": [
     {
-      "name": "식비",
-      "식비": "",
-      "id": "9058"
+      "value": "식비",
+      "text": "식비",
+      "id": "e3d1"
     },
     {
-      "name": "교통비",
-      "교통비": "",
-      "id": "1a3c"
+      "value": "교통비",
+      "text": "교통비",
+      "id": "666e"
     },
     {
-      "name": "공과금",
-      "공과금": "",
-      "id": "6504"
+      "value": "공과금",
+      "text": "공과금",
+      "id": "4f03"
     },
     {
-      "name": "경조사비",
-      "경조사비": "",
-      "id": "3ec7"
+      "value": "경조사비",
+      "text": "경조사비",
+      "id": "9ecb"
     },
     {
-      "name": "애견용품",
-      "애견용품": "",
-      "id": "fceb"
+      "value": "애견용품",
+      "text": "애견용품",
+      "id": "2fe1"
     }
   ],
   "periodicExpense": [
