@@ -86,7 +86,7 @@ const attributes = ref([
 ]);
 </script>
 <style>
-/* .table-tbody {
+.table-tbody {
   display: block;
   max-height: 800px;
   overflow-y: scroll;
