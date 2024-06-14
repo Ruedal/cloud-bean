@@ -42,7 +42,11 @@
               </div>
               <div class="p-1 form-group col-md-4">
                 <label for="category">카테고리</label>
-                <select v-model="contents.category" class="form-control" id="category">
+                <select
+                  v-model="contents.category"
+                  class="form-control"
+                  id="category"
+                >
                   <option value="" selected>Choose...</option>
                   <option
                     v-for="option in categoryOptions"
@@ -55,7 +59,12 @@
               </div>
               <div class="p-1 form-group col-md-4">
                 <label for="amount">금액</label>
-                <input type="text" class="form-control" id="amount" v-model="contents.amount" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="amount"
+                  v-model="contents.amount"
+                />
               </div>
             </div>
             <div class="p-1 form-group col-md-12">
@@ -72,15 +81,27 @@
         <div>
           <!-- 버튼 그룹 -->
           <div class="mt-4 form-group">
-            <button type="button" class="btn btn-outline-primary m-1" @click="resetForm">
+            <button
+              type="button"
+              class="btn btn-outline-primary m-1"
+              @click="resetForm"
+            >
               리 셋
             </button>
             <br />
-            <button type="button" class="btn btn-primary m-1" @click="router.push('/tab')">
+            <button
+              type="button"
+              class="btn btn-primary m-1"
+              @click="router.push('/tab')"
+            >
               취 소
             </button>
             <br />
-            <button type="button" class="btn btn-primary m-1" @click="updateACHandler">
+            <button
+              type="button"
+              class="btn btn-primary m-1"
+              @click="updateACHandler"
+            >
               수 정
             </button>
           </div>
@@ -102,7 +123,9 @@ const AddContentStore = useAddContentStore();
 const incomeCategory = computed(() => AddContentStore.incomeCategory);
 const expenseCategory = computed(() => AddContentStore.expenseCategory);
 
-const matchedAC = AddContentStore.addContent.find((item) => item.id === currentRoute.params.id);
+const matchedAC = AddContentStore.addContent.find(
+  (item) => item.id === currentRoute.params.id
+);
 if (!matchedAC) {
   router.push('/tab');
 }

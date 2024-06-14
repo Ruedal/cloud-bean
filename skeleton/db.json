@@ -1,14 +1,6 @@
 {
   "addContent": [
     {
-      "id": "eafc",
-      "date": "2024-06-12",
-      "type": "입금",
-      "category": "이자",
-      "amount": "200000",
-      "memo": "이자가 이십만원?"
-    },
-    {
       "id": "598e",
       "date": "2024-06-04",
       "type": "출금",
@@ -41,12 +33,12 @@
       "memo": "짜계치"
     },
     {
-      "id": "43c3",
-      "date": "2024-06-19",
-      "type": "출금",
-      "category": "공과금",
-      "amount": "200000",
-      "memo": "안녕"
+      "id": "",
+      "date": "2024-06-02",
+      "type": "입금",
+      "category": "월급",
+      "amount": "2500000",
+      "memo": "월급"
     }
   ],
   "incomeCategory": [
@@ -109,8 +101,9 @@
   ],
   "users": [
     {
+      "image": "",
       "name": "",
-      "pic": "",
+      "email": "",
       "id": "8a6e"
     }
   ]

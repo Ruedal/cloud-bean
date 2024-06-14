@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <nav class="navbar navbar-sm bg-dark navbar-dark rounded-3">
-            <span class="navbar-brand ps-4">Cloud Bean</span>
-        </nav>
-    </div>
+  <div>
+    <nav class="navbar navbar-sm bg-dark navbar-dark rounded-3">
+      <span class="navbar-brand ps-4">Cloud Bean</span>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -13,9 +13,9 @@ export default {};
 </script>
 <style scoped>
 .nav-link {
-    padding: 15px;
+  padding: 15px;
 }
 .navbar {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 </style>
