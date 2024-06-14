@@ -1,7 +1,7 @@
 <template>
   <div>
-    <nav class="navbar navbar-sm bg-dark navbar-dark rounded-4">
-      <span class="navbar-brand ps-2">Cloud Bean</span>
+    <nav class="navbar navbar-sm bg-dark navbar-dark rounded-3">
+      <span class="navbar-brand ps-4">Cloud Bean</span>
     </nav>
   </div>
 </template>

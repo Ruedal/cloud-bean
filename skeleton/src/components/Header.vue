@@ -16,7 +16,7 @@
     <div class="d-flex vh-100">
       <nav
         class="navbar navbar-expand-lg navbar-dark bg-dark flex-column align-items-center rounded-4 mt-1"
-        style="width: 20%; height: 100vh"
+        style="width: 20%"
       >
         <a class="navbar-brand" href="#">목록</a>
         <div class="navbar-nav flex-column w-100">
@@ -52,8 +52,6 @@ export default {
         { text: '월별 요약', link: '/HomeSum' },
         { text: '프로필 설정', link: '/profile' },
       ],
-      profileImage: 'path_to_profile_image.jpg', // Update with the actual path to the profile image
-      profileName: 'Your Name', // Update with dynamic name if needed
     };
   },
 };

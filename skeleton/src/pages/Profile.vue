@@ -1,5 +1,8 @@
 <template>
-  <div class="d-flex justify-content-center align-item-center win-vh-100">
+  <div
+    id="prftop"
+    class="d-flex justify-content-center align-item-center win-vh-100"
+  >
     <form
       @submit.prevent="submitProfile"
       class="card p-2"
@@ -16,13 +19,7 @@
           <div class="card-body"></div>
         </div>
       </label>
-      <input
-        type="file"
-        id="image"
-        @change="onFilechange"
-        accept="image/*"
-        style="margin-left: 90px"
-      />
+      <input type="file" id="image" @change="onFilechange" accept="image/*" />
       <label for="name">이름 :</label>
       <input type="text" id="name" v-model="profile.name" required />
 
@@ -98,5 +95,12 @@ label {
 .card-img-top {
   max-width: 100%; /* 이미지 최대 너비 설정 */
   height: auto; /* 이미지 높이 자동 조정 */
+}
+#image {
+  margin-left: 100px;
+}
+#prftop {
+  margin-top: 13px;
+  margin-bottom: -5px;
 }
 </style>

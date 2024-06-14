@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar flex-column navbar-expand-lg bg-dark navbar-dark mt-1 rounded-4"
+    class="navbar flex-column navbar-expand-lg bg-dark navbar-dark mt-1 rounded-3"
     style="height: 100%"
   >
     <span class="navbar-brand">목록</span>

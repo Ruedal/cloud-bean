@@ -1,8 +1,8 @@
 <!-- addContent 자료 모아두는 공간 -->
 <!-- 클릭 이벤트로 addContent에 해당 내용 불러오게 -->
 <template>
-  <tr class="table-thead-tr">
-    <td class="text-center" @click="router.push(`/tab/edit/${contents.id}`)">
+  <tr class="">
+    <td class="" @click="router.push(`/tab/edit/${contents.id}`)">
       {{ contents.date.substr(0, 10) }}
     </td>
     <td class="text-center" @click="router.push(`/tab/edit/${contents.id}`)">
@@ -28,11 +28,12 @@
     <td class="text-center" @click="router.push(`/tab/edit/${contents.id}`)">
       {{ contents.memo }}
     </td>
-    <span
-      class="float-end badge bg-primary pointer m-1"
+    <td
+      class="badge bg-dark text-light pointer m-1"
       @click="deleteAC(contents.id)"
-      >삭제</span
     >
+      삭제
+    </td>
   </tr>
 </template>
 
@@ -48,7 +49,7 @@ const { deleteAC } = AddContentStore;
 </script>
 <style>
 /* .table-thead-tr {
-  display: table;
-  width: 100%;
+display: table;
+width: 100%;
 } */
 </style>

@@ -39,6 +39,14 @@
       "category": "식비",
       "amount": "5500",
       "memo": "짜계치"
+    },
+    {
+      "id": "",
+      "date": "2024-06-02",
+      "type": "입금",
+      "category": "월급",
+      "amount": "2500000",
+      "memo": "월급"
     }
   ],
   "incomeCategory": [

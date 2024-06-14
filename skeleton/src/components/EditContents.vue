@@ -115,7 +115,6 @@
 import { ref, reactive, computed, watchEffect } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAddContentStore } from '@/stores/cloudBean.js';
-import { format } from 'date-fns';
 
 const router = useRouter();
 const currentRoute = useRoute();
@@ -139,20 +138,13 @@ const allCategoryOptions = computed(() => ({
   출금: expenseCategory.value,
 }));
 
-const adjustDate = (date) => {
-  const localDate = new Date(date);
-  localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset());
-  return localDate.toISOString().split('T')[0];
-};
-
 const updateACHandler = () => {
   if (!contents.date || !contents.category || !contents.amount) {
     alert('모든 필드를 채워주세요.');
     return;
   }
 
-  const adjustedDate = adjustDate(contents.date);
-  AddContentStore.updateAC({ ...contents, date: adjustedDate }, () => {
+  AddContentStore.updateAC({ ...contents }, () => {
     router.push('/tab');
   });
 };
@@ -174,18 +166,4 @@ const onTransactionTypeChange = () => {
 watchEffect(() => {
   onTransactionTypeChange();
 });
-
-//날짜 선택 부분
-const attributes = ref([
-  {
-    highlight: true,
-    dates: {
-      start: new Date(2022, 10, 7),
-      repeat: {
-        every: [2, 'weeks'],
-        weekdays: 2,
-      },
-    },
-  },
-]);
 </script>

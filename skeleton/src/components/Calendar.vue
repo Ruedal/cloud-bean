@@ -1,17 +1,17 @@
 <template>
   <div id="calendarSection" class="container">
     <!-- 월별 합계 상자 -->
-    <div class="summary-box card text-center mb-4 mt-3 p-1">
+    <div class="summary-box card text-center mb-4 mt-4 p-3">
       <div class="card-body row">
-        <div class="summary-item col">
+        <div class="summary-item">
           <h5 class="card-title">입금</h5>
           <p class="card-text text-primary">{{ totalDeposit }} 원</p>
         </div>
-        <div class="summary-item col">
+        <div class="summary-item">
           <h5 class="card-title">출금</h5>
           <p class="card-text text-danger">{{ totalWithdrawal }} 원</p>
         </div>
-        <div class="summary-item col">
+        <div class="summary-item">
           <h5 class="card-title">합계</h5>
           <p class="card-text text-dark">{{ balance }} 원</p>
         </div>
@@ -30,7 +30,11 @@
             &lt;
           </button>
           <h5 class="card-title m-0 fw-bold fs-3">{{ calendarHeader }}</h5>
-          <button type="button" class="btn btn-light btn-outline-secondary" @click="changeMonth(1)">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary"
+            @click="changeMonth(1)"
+          >
             &gt;
           </button>
         </div>
@@ -132,9 +136,13 @@ const formatTransactions = (data) => {
     }
     // console.log(`${JSON.stringify(item.amount)}`);
     if (item.type === '입금') {
-      formattedTransactions[year][month][day].deposit += parseFloat(item.amount);
+      formattedTransactions[year][month][day].deposit += parseFloat(
+        item.amount
+      );
     } else if (item.type === '출금') {
-      formattedTransactions[year][month][day].withdrawal += parseFloat(item.amount);
+      formattedTransactions[year][month][day].withdrawal += parseFloat(
+        item.amount
+      );
     }
   });
   return formattedTransactions;
@@ -158,7 +166,8 @@ const calendarImplementation = () => {
 
 const addLastWeekEmptyDays = () => {
   const daysLastIndex = days.value.length - 1;
-  if (days.value[daysLastIndex].length !== 7) days.value[daysLastIndex].length = 7;
+  if (days.value[daysLastIndex].length !== 7)
+    days.value[daysLastIndex].length = 7;
 };
 
 const changeMonth = (val) => {
@@ -168,7 +177,10 @@ const changeMonth = (val) => {
 };
 
 const totalDeposit = computed(() => {
-  if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
+  if (
+    !transactions.value[year.value] ||
+    !transactions.value[year.value][month.value]
+  ) {
     return 0;
   }
   return Object.values(transactions.value[year.value][month.value]).reduce(
@@ -178,7 +190,10 @@ const totalDeposit = computed(() => {
 });
 
 const totalWithdrawal = computed(() => {
-  if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
+  if (
+    !transactions.value[year.value] ||
+    !transactions.value[year.value][month.value]
+  ) {
     return 0;
   }
   return Object.values(transactions.value[year.value][month.value]).reduce(
@@ -236,10 +251,11 @@ td {
 .summary-box {
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 .summary-item {
   flex: 1;
+  margin-left: 30px;
 }
 .calendar-box {
   border-radius: 10px;
