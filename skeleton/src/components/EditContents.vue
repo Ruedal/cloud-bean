@@ -122,7 +122,6 @@ const AddContentStore = useAddContentStore();
 const incomeCategory = computed(() => AddContentStore.incomeCategory);
 const expenseCategory = computed(() => AddContentStore.expenseCategory);
 
-<<<<<<< HEAD
 const matchedAC = AddContentStore.addContent.find(
   (item) => item.id === currentRoute.params.id
 );
@@ -135,7 +134,6 @@ const contents = reactive({ ...matchedAC });
 const categoryOptions = ref([]);
 
 const allCategoryOptions = computed(() => ({
-<<<<<<< HEAD
   입금: incomeCategory.value,
   출금: expenseCategory.value,
 }));
@@ -162,42 +160,10 @@ const resetForm = () => {
 
 const onTransactionTypeChange = () => {
   categoryOptions.value = allCategoryOptions.value[contents.type] || [];
-=======
-    입금: incomeCategory.value,
-    출금: expenseCategory.value,
-}));
-
-const updateACHandler = () => {
-    if (!contents.date || !contents.category || !contents.amount) {
-        alert('모든 필드를 채워주세요.');
-        return;
-    }
-
-    AddContentStore.updateAC({ ...contents }, () => {
-        router.push('/tab');
-    });
-};
-
-const resetForm = () => {
-    contents.date = matchedAC.date;
-    contents.type = matchedAC.type;
-    contents.category = matchedAC.category;
-    contents.amount = matchedAC.amount;
-    contents.memo = matchedAC.memo;
-    onTransactionTypeChange();
-};
-
-const onTransactionTypeChange = () => {
-    categoryOptions.value = allCategoryOptions.value[contents.type] || [];
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 };
 
 // 초기 로드 시 카테고리 옵션 설정
 watchEffect(() => {
-<<<<<<< HEAD
   onTransactionTypeChange();
-=======
-    onTransactionTypeChange();
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 });
 </script>
