@@ -168,7 +168,6 @@ const formatTransactions = (data) => {
 
         // console.log(`${JSON.stringify(item)}`);
 
-<<<<<<< HEAD
     if (!formattedTransactions[year]) {
       formattedTransactions[year] = {};
     }
@@ -190,25 +189,6 @@ const formatTransactions = (data) => {
     }
   });
   return formattedTransactions;
-=======
-        if (!formattedTransactions[year]) {
-            formattedTransactions[year] = {};
-        }
-        if (!formattedTransactions[year][month]) {
-            formattedTransactions[year][month] = {};
-        }
-        if (!formattedTransactions[year][month][day]) {
-            formattedTransactions[year][month][day] = { deposit: 0, withdrawal: 0 };
-        }
-        // console.log(`${JSON.stringify(item.amount)}`);
-        if (item.type === '입금') {
-            formattedTransactions[year][month][day].deposit += parseFloat(item.amount);
-        } else if (item.type === '출금') {
-            formattedTransactions[year][month][day].withdrawal += parseFloat(item.amount);
-        }
-    });
-    return formattedTransactions;
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 };
 
 const calendarImplementation = () => {
@@ -228,14 +208,9 @@ const calendarImplementation = () => {
 };
 
 const addLastWeekEmptyDays = () => {
-<<<<<<< HEAD
   const daysLastIndex = days.value.length - 1;
   if (days.value[daysLastIndex].length !== 7)
     days.value[daysLastIndex].length = 7;
-=======
-    const daysLastIndex = days.value.length - 1;
-    if (days.value[daysLastIndex].length !== 7) days.value[daysLastIndex].length = 7;
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 };
 
 const changeMonth = (val) => {
@@ -245,7 +220,6 @@ const changeMonth = (val) => {
 };
 
 const totalDeposit = computed(() => {
-<<<<<<< HEAD
   if (
     !transactions.value[year.value] ||
     !transactions.value[year.value][month.value]
@@ -269,19 +243,6 @@ const totalWithdrawal = computed(() => {
     (acc, day) => acc + day.withdrawal,
     0
   );
-=======
-    if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
-        return 0;
-    }
-    return Object.values(transactions.value[year.value][month.value]).reduce((acc, day) => acc + day.deposit, 0);
-});
-
-const totalWithdrawal = computed(() => {
-    if (!transactions.value[year.value] || !transactions.value[year.value][month.value]) {
-        return 0;
-    }
-    return Object.values(transactions.value[year.value][month.value]).reduce((acc, day) => acc + day.withdrawal, 0);
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 });
 
 const balance = computed(() => {
@@ -331,7 +292,6 @@ td {
     width: 100%; /* 전체 폭을 채웁니다 */
 }
 .summary-box {
-<<<<<<< HEAD
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 8px;
@@ -339,15 +299,6 @@ td {
 .summary-item {
   flex: 1;
   margin-left: 30px;
-=======
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-.summary-item {
-    flex: 1;
-    margin-left: 30px;
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 }
 .calendar-box {
     border-radius: 10px;

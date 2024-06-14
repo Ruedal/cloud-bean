@@ -128,11 +128,6 @@ const matchedAC = AddContentStore.addContent.find(
 );
 if (!matchedAC) {
   router.push('/tab');
-=======
-const matchedAC = AddContentStore.addContent.find((item) => item.id === currentRoute.params.id);
-if (!matchedAC) {
-    router.push('/tab');
->>>>>>> 479aa454ea9abfd60fd97c52801878d49eb901a0
 }
 
 const contents = reactive({ ...matchedAC });
