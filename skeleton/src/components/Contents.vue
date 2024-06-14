@@ -28,11 +28,14 @@
     <td class="text-center" @click="router.push(`/tab/edit/${contents.id}`)">
       {{ contents.memo }}
     </td>
-    <td
-      class="badge bg-dark text-light pointer m-1"
-      @click="deleteAC(contents.id)"
-    >
-      삭제
+    <td class="text-center">
+      <span
+        class="badge bg-dark text-light pointer m-1"
+        @click="deleteAC(contents.id)"
+        id="delete"
+      >
+        삭제
+      </span>
     </td>
   </tr>
 </template>
