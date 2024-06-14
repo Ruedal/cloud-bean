@@ -1,8 +1,8 @@
 <template>
-  <div class="m-3 p-3">
-    <AddContents />
-    <History />
-  </div>
+    <div class="">
+        <AddContents />
+        <History />
+    </div>
 </template>
 <script setup>
 import AddContents from '@/components/AddContents.vue';

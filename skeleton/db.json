@@ -20,7 +20,7 @@
       "id": "0a04",
       "date": "2024-06-07",
       "type": "출금",
-      "category": "교통비",
+      "category": "경조사비",
       "amount": "50000",
       "memo": "월 교통카드 충전비"
     },
@@ -39,6 +39,14 @@
       "category": "식비",
       "amount": "5500",
       "memo": "짜계치"
+    },
+    {
+      "id": "43c3",
+      "date": "2024-06-19",
+      "type": "출금",
+      "category": "공과금",
+      "amount": "200000",
+      "memo": "안녕"
     }
   ],
   "incomeCategory": [
