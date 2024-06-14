@@ -1,13 +1,13 @@
 <template>
-  <div class="col-sm-7 row m-2">
-    <div class="col p-3">
+  <div id="hisli" class="col-sm-7 row m-2">
+    <div class="col">
       <!-- 테이블 10행 5열에 추가 데이터는 1, 2, 3 목차형식으로 처리 -->
       <!-- 날짜별 필터 기능 / 카테고리별  필터 기능 날짜에 -->
       <!-- v-filter 를 셀렉트와 연계해서? 조건문으로 조건에 해당되지 않을 경우 HIDE -->
       <!-- 조건문으로 날짜와 카테고리를 &&사용해서 동시 조건 가능할것 같음 -->
-      <table class="table table-sm">
+      <table class="table table-sm border border-2 table-bordered">
         <thead class="table-active">
-          <tr class="text-cente table-thead-tr">
+          <tr class="text-center table-thead-tr">
             <th>
               <div id="cal">
                 <VDatePicker v-model="date">
@@ -44,6 +44,7 @@
             <th class="text-end">수입</th>
             <th class="text-end">지출</th>
             <th class="text-center">메모</th>
+            <th class="text-center">삭제</th>
           </tr>
         </thead>
         <tbody class="table-tbody">
@@ -93,5 +94,13 @@ const attributes = ref([
 .table-thead-tr {
   display: table;
   width: 100%;
-} */
+  position: sticky;
+  table-layout: fixed;
+}
+#hisli {
+  width: 100%;
+}
+.table {
+  table-layout: fixed;
+}
 </style>
